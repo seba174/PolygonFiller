@@ -32,7 +32,7 @@ namespace PolygonFiller
                 EdgeDetails bucket = new EdgeDetails
                 {
                     YMax = pointWithMaxY.Position.Y,
-                    XofSecondVertice = edge.GetSecondEndpoint(pointWithMaxY).Position.X,
+                    XofSecondVertice = edge.GetSecondEndpoint(pointWithMaxY).Position.X - xMin,
                     Step = (double)dx / dy
                 };
 
@@ -59,13 +59,15 @@ namespace PolygonFiller
 
                 for (int i = 0; i < aet.Count - 1; i++)
                 {
-                    for (double j = aet[i].XofSecondVertice; j < aet[i + 1].XofSecondVertice; j++)
+                    int loopEnd = (int)aet[i + 1].XofSecondVertice;
+                    for (int j = (int)aet[i].XofSecondVertice; j < loopEnd; j++)
                     {
-                        directBitmap.SetPixel((int)(j - xMin), y, Color.Yellow);
+                        directBitmap.SetPixel(j, y, Color.Yellow);
                     }
                 }
 
                 aet.RemoveAll(b => b.YMax == y + yMin);
+
                 foreach (var bucket in aet)
                 {
                     bucket.XofSecondVertice += bucket.Step;

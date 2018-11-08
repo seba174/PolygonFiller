@@ -5,7 +5,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{026330FA-93D5-47D2-A85B-A62ECEC2E647}</ProjectGuid>
-    <OutputType>WinExe</OutputType>
+    <OutputType>Exe</OutputType>
     <RootNamespace>PolygonFiller</RootNamespace>
     <AssemblyName>PolygonFiller</AssemblyName>
     <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
@@ -51,11 +51,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Forms\PolygonEditor.cs">
+    <Compile Include="Forms\PolygonFiller.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\PolygonEditor.designer.cs">
-      <DependentUpon>PolygonEditor.cs</DependentUpon>
+    <Compile Include="Forms\PolygonFiller.designer.cs">
+      <DependentUpon>PolygonFiller.cs</DependentUpon>
     </Compile>
     <Compile Include="InputHandlers\DrawingAreaInputHandler.cs" />
     <Compile Include="Interfaces\IClickable.cs" />
@@ -70,8 +70,8 @@
     <Compile Include="Utilities\PointUtilities.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Polygon\Vertice.cs" />
-    <EmbeddedResource Include="Forms\PolygonEditor.resx">
-      <DependentUpon>PolygonEditor.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\PolygonFiller.resx">
+      <DependentUpon>PolygonFiller.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
