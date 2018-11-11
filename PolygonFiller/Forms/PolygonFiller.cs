@@ -59,6 +59,52 @@ namespace PolygonFiller
             drawingArea.MouseDown += inputHandler.HandleMouseDown;
             drawingArea.MouseUp += inputHandler.HandleMouseUp;
             drawingArea.MouseMove += inputHandler.HandleMouseMove;
+
+            LightColorButton.Click += ChangeLightColor;
+            ObjectColorButton.Click += ChangeObjectColor;
+            ObjectTextureButton.Click += ChangeObjectTexture;
+            NormalVectorTextureButton.Click += ChangeNormalMap;
+            DisruptionVectorTextureButton.Click += ChangeHeightMap;
+        }
+
+        private void ChangeHeightMap(object sender, EventArgs e)
+        {
+            if (TextureFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                DisruptionVectorTextureBox.BackgroundImage = Image.FromFile(TextureFileDialog.FileName);
+            }
+        }
+
+        private void ChangeNormalMap(object sender, EventArgs e)
+        {
+            if (TextureFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                NormalVectorTextureBox.BackgroundImage = Image.FromFile(TextureFileDialog.FileName);
+            }
+        }
+
+        private void ChangeObjectTexture(object sender, EventArgs e)
+        {
+            if (TextureFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                IoTextureBox.BackgroundImage = Image.FromFile(TextureFileDialog.FileName);
+            }
+        }
+
+        private void ChangeObjectColor(object sender, EventArgs e)
+        {
+            if (ColorDialog.ShowDialog() == DialogResult.OK)
+            {
+                IoColorBox.BackColor = ColorDialog.Color;
+            }
+        }
+
+        private void ChangeLightColor(object sender, EventArgs e)
+        {
+            if (ColorDialog.ShowDialog() == DialogResult.OK)
+            {
+                ILColorBox.BackColor = ColorDialog.Color;
+            }
         }
 
         private void OnElementUnselection()

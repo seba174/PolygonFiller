@@ -5,7 +5,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{026330FA-93D5-47D2-A85B-A62ECEC2E647}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <OutputType>WinExe</OutputType>
     <RootNamespace>PolygonFiller</RootNamespace>
     <AssemblyName>PolygonFiller</AssemblyName>
     <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
