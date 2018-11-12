@@ -9,7 +9,7 @@ namespace PolygonFiller
 {
     public static class PolygonFill
     {
-        public static DirectBitmap GetPolygonFillDirectBitmap(IPolygon polygon)
+        public static DirectBitmap GetPolygonFillDirectBitmap(IPolygon polygon, ColorsForPolygonFill colorsForPolygonFill)
         {
             int xMin = polygon.Vertices.Min(v => v.Position.X);
             int yMin = polygon.Vertices.Min(v => v.Position.Y);
@@ -19,6 +19,7 @@ namespace PolygonFiller
                 BitmapLocationForDrawing = new Point(xMin, yMin)
             };
 
+            colorsForPolygonFill.Offset = new Point(xMin, yMin);
             List<EdgeDetails>[] et = new List<EdgeDetails>[directBitmap.Height - 1];
 
             foreach (var edge in polygon.Edges)
@@ -62,7 +63,7 @@ namespace PolygonFiller
                     int loopEnd = (int)aet[i + 1].XofSecondVertice;
                     for (int j = (int)aet[i].XofSecondVertice; j < loopEnd; j++)
                     {
-                        directBitmap.SetPixel(j, y, Color.Yellow);
+                        directBitmap.SetPixel(j, y, colorsForPolygonFill.GetColor(j + xMin, y + yMin));
                     }
                 }
 

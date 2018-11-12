@@ -14,6 +14,7 @@ namespace PolygonFiller
         private PolygonDrawer standardPolygonDrawer;
         private PolygonDrawer selectedElementDrawer;
         private List<IPolygon> polygons;
+        private ColorsForPolygonFill colorsForPolygonFill;
 
         public PolygonFiller()
         {
@@ -54,6 +55,12 @@ namespace PolygonFiller
                 VerticeRadius = standardPolygonDrawer.VerticeRadius,
             };
 
+            colorsForPolygonFill = new ColorsForPolygonFill
+            {
+                ObjectColorOption = ObjectColorOption.Constant,
+                ObjectColor = ILColorBox.BackColor
+            };
+
             drawingArea.Paint += Draw;
 
             drawingArea.MouseDown += inputHandler.HandleMouseDown;
@@ -87,7 +94,11 @@ namespace PolygonFiller
         {
             if (TextureFileDialog.ShowDialog() == DialogResult.OK)
             {
-                IoTextureBox.BackgroundImage = Image.FromFile(TextureFileDialog.FileName);
+                Bitmap bitmap = new Bitmap(TextureFileDialog.FileName);
+                IoTextureBox.BackgroundImage = bitmap;
+                colorsForPolygonFill.ChangeObjectTexture(bitmap);
+                colorsForPolygonFill.ObjectColorOption = ObjectColorOption.FromTexture;
+                drawingArea.Refresh();
             }
         }
 
@@ -96,6 +107,9 @@ namespace PolygonFiller
             if (ColorDialog.ShowDialog() == DialogResult.OK)
             {
                 IoColorBox.BackColor = ColorDialog.Color;
+                colorsForPolygonFill.ObjectColor = ColorDialog.Color;
+                colorsForPolygonFill.ObjectColorOption = ObjectColorOption.Constant;
+                drawingArea.Refresh();
             }
         }
 
@@ -122,7 +136,7 @@ namespace PolygonFiller
             ConcurrentDictionary<IPolygon, DirectBitmap> directBitmaps = new ConcurrentDictionary<IPolygon, DirectBitmap>(Environment.ProcessorCount, polygons.Count);
             Parallel.ForEach(polygons, polygon =>
             {
-                directBitmaps.TryAdd(polygon, PolygonFill.GetPolygonFillDirectBitmap(polygon));
+                directBitmaps.TryAdd(polygon, PolygonFill.GetPolygonFillDirectBitmap(polygon, colorsForPolygonFill));
             });
 
             foreach (var polygon in polygons)
