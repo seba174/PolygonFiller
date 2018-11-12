@@ -60,7 +60,6 @@
     </Compile>
     <Compile Include="InputHandlers\DrawingAreaInputHandler.cs" />
     <Compile Include="Interfaces\IClickable.cs" />
-    <Compile Include="Interfaces\InputHandler.cs" />
     <Compile Include="Interfaces\IPolygon.cs" />
     <Compile Include="Polygon\ColorsForPolygonFill.cs" />
     <Compile Include="Polygon\Edge.cs" />

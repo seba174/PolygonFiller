@@ -6,7 +6,7 @@ using System.Windows.Forms;
 
 namespace PolygonFiller
 {
-    public class DrawingAreaInputHandler : InputHandler
+    public class DrawingAreaInputHandler
     {
         private bool isLeftMouseButtonClicked;
         private bool isMiddleMouseButtonClicked;
@@ -16,6 +16,8 @@ namespace PolygonFiller
         public Action OnElementSelection { get; set; }
         public Action OnElementUnselection { get; set; }
         public Action OnSuccessfullElementMove { get; set; }
+
+        public Rectangle ClickArea { get; set; }
 
         public IPolygon SelectedPolygon { get; private set; }
         public IClickable SelectedElement { get; private set; }
@@ -35,25 +37,24 @@ namespace PolygonFiller
             if (SelectedElement == null || SelectedPolygon == null)
                 return;
 
-            Point offsetFromLastMove = new Point(e.X - selectedElementLastPosition.X, e.Y - selectedElementLastPosition.Y);
-            selectedElementLastPosition = e.Location;
+            Point location = GetPointInsideClickArea(e.Location);
+
+            Point offsetFromLastMove = new Point(location.X - selectedElementLastPosition.X, location.Y - selectedElementLastPosition.Y);
+            selectedElementLastPosition = location;
 
             if (isLeftMouseButtonClicked)
             {
-                if (!SelectedPolygon.HandleClickableMove(SelectedElement, offsetFromLastMove))
-                {
-                    if (SelectedPolygon.HandlePolygonMove(offsetFromLastMove))
-                    {
-                        OnSuccessfullElementMove?.Invoke();
-                    }
-                }
-                else
+                if (!SelectedPolygon.IsClickableMovingPermitted(SelectedElement, offsetFromLastMove, ClickArea))
+                    return;
+                if (SelectedPolygon.HandleClickableMove(SelectedElement, offsetFromLastMove))
                 {
                     OnSuccessfullElementMove?.Invoke();
                 }
             }
             else if (isMiddleMouseButtonClicked)
             {
+                if (!SelectedPolygon.IsPolygonMovingPermitted(offsetFromLastMove, ClickArea))
+                    return;
                 if (SelectedPolygon.HandlePolygonMove(offsetFromLastMove))
                 {
                     OnSuccessfullElementMove?.Invoke();
@@ -116,6 +117,21 @@ namespace PolygonFiller
             }
 
             ClearSelected();
+        }
+
+        private Point GetPointInsideClickArea(Point original)
+        {
+            if (original.X < ClickArea.Left)
+                original = new Point(ClickArea.Left, original.Y);
+            else if (original.X > ClickArea.Right)
+                original = new Point(ClickArea.Right, original.Y);
+
+            if (original.Y < ClickArea.Top)
+                original = new Point(original.X, ClickArea.Top);
+            else if (original.Y > ClickArea.Bottom)
+                original = new Point(original.X, ClickArea.Bottom);
+
+            return original;
         }
     }
 }
