@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Drawing;
-using System.Drawing.Imaging;
 using System.Linq;
-using System.Runtime.InteropServices;
 
 namespace PolygonFiller
 {
@@ -19,7 +16,6 @@ namespace PolygonFiller
                 BitmapLocationForDrawing = new Point(xMin, yMin)
             };
 
-            colorsForPolygonFill.Offset = new Point(xMin, yMin);
             List<EdgeDetails>[] et = new List<EdgeDetails>[directBitmap.Height - 1];
 
             foreach (var edge in polygon.Edges)
@@ -27,7 +23,9 @@ namespace PolygonFiller
                 int dx = edge.Endpoints[0].Position.X - edge.Endpoints[1].Position.X;
                 int dy = edge.Endpoints[0].Position.Y - edge.Endpoints[1].Position.Y;
                 if (dy == 0)
+                {
                     continue;
+                }
 
                 Vertice pointWithMaxY = edge.Endpoints.Where(v => v.Position.Y == edge.Endpoints.Max(vertice => vertice.Position.Y)).First();
                 EdgeDetails bucket = new EdgeDetails
@@ -54,7 +52,9 @@ namespace PolygonFiller
             for (int y = 0; y < et.Length; y++)
             {
                 if (et[y] != null)
+                {
                     aet.AddRange(et[y]);
+                }
 
                 aet.Sort(bucketComparer);
 
@@ -76,54 +76,6 @@ namespace PolygonFiller
             }
 
             return directBitmap;
-        }
-    }
-
-    public class DirectBitmap : IDisposable
-    {
-        public Bitmap Bitmap { get; private set; }
-        public Int32[] Bits { get; private set; }
-        public bool Disposed { get; private set; }
-        public int Height { get; private set; }
-        public int Width { get; private set; }
-        public Point BitmapLocationForDrawing { get; set; }
-
-        protected GCHandle BitsHandle { get; private set; }
-
-        public DirectBitmap(int width, int height)
-        {
-            Width = width;
-            Height = height;
-            Bits = new Int32[width * height];
-            BitsHandle = GCHandle.Alloc(Bits, GCHandleType.Pinned);
-            Bitmap = new Bitmap(width, height, width * 4, PixelFormat.Format32bppPArgb, BitsHandle.AddrOfPinnedObject());
-        }
-
-        public void SetPixel(int x, int y, Color colour)
-        {
-            int index = x + (y * Width);
-            int col = colour.ToArgb();
-
-            Bits[index] = col;
-        }
-
-        public Color GetPixel(int x, int y)
-        {
-            int index = x + (y * Width);
-            int col = Bits[index];
-            Color result = Color.FromArgb(col);
-
-            return result;
-        }
-
-        public void Dispose()
-        {
-            if (Disposed)
-                return;
-
-            Disposed = true;
-            Bitmap.Dispose();
-            BitsHandle.Free();
         }
     }
 

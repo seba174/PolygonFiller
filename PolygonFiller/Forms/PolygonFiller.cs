@@ -3,6 +3,7 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using System.Numerics;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -10,7 +11,7 @@ namespace PolygonFiller
 {
     public partial class PolygonFiller : Form
     {
-        private InputHandler inputHandler;
+        private DrawingAreaInputHandler inputHandler;
         private PolygonDrawer standardPolygonDrawer;
         private PolygonDrawer selectedElementDrawer;
         private List<IPolygon> polygons;
@@ -55,30 +56,93 @@ namespace PolygonFiller
                 VerticeRadius = standardPolygonDrawer.VerticeRadius,
             };
 
+            ColorsForPolygonFill.ConstantDisruptionVector = new Vector3(0, 0, 0);
+            ColorsForPolygonFill.ConstantNormalVector = new Vector3(0, 0, 1);
+            ColorsForPolygonFill.ConstantVectorToLight = new Vector3(0, 0, 1);
+
             colorsForPolygonFill = new ColorsForPolygonFill
             {
                 ObjectColorOption = ObjectColorOption.Constant,
-                ObjectColor = ILColorBox.BackColor
+                DisruptionVectorOption = DisruptionVectorOption.None,
+                NormalVectorOption = NormalVectorOption.Constant,
+                VectorToLightOption = VectorToLightOption.Constant,
+                ObjectColor = ILColorBox.BackColor,
+                LightColor = new Vector3(1, 1, 1),
+                VisibleAreaDimensions = drawingArea.Size
             };
 
             drawingArea.Paint += Draw;
+            ResizeEnd += UpdateVisibleAreaSize;
 
             drawingArea.MouseDown += inputHandler.HandleMouseDown;
             drawingArea.MouseUp += inputHandler.HandleMouseUp;
             drawingArea.MouseMove += inputHandler.HandleMouseMove;
 
             LightColorButton.Click += ChangeLightColor;
-            ObjectColorButton.Click += ChangeObjectColor;
-            ObjectTextureButton.Click += ChangeObjectTexture;
-            NormalVectorTextureButton.Click += ChangeNormalMap;
-            DisruptionVectorTextureButton.Click += ChangeHeightMap;
+            SetObjectColorButton.Click += ChangeObjectColor;
+            SetObjectTextureButton.Click += ChangeObjectTexture;
+            SetNormalMapButton.Click += ChangeNormalMap;
+            SetHeightMapButton.Click += ChangeHeightMap;
+
+            ObjectColorFromTexture.Click += SetObjectColorFromTexture;
+            ObjectColorSingle.Click += SetConstantObjectColor;
+            NormalVectorConstant.Click += SetNormalVectorConstant;
+            NormalVectorFromTexture.Click += SetNormalVectorFromTexture;
+            DisruptionVectorConstant.Click += SetDisruptionVectorConstant;
+            DisruptionVectorFromTexture.Click += SetDisruptionVectorFromTexture;
+        }
+
+        private void SetDisruptionVectorFromTexture(object sender, EventArgs e)
+        {
+            colorsForPolygonFill.DisruptionVectorOption = DisruptionVectorOption.FromHeightMap;
+            drawingArea.Refresh();
+        }
+
+        private void SetDisruptionVectorConstant(object sender, EventArgs e)
+        {
+            colorsForPolygonFill.DisruptionVectorOption = DisruptionVectorOption.None;
+            drawingArea.Refresh();
+        }
+
+        private void SetNormalVectorFromTexture(object sender, EventArgs e)
+        {
+            colorsForPolygonFill.NormalVectorOption = NormalVectorOption.FromNormalMap;
+            drawingArea.Refresh();
+        }
+
+        private void SetNormalVectorConstant(object sender, EventArgs e)
+        {
+            colorsForPolygonFill.NormalVectorOption = NormalVectorOption.Constant;
+            drawingArea.Refresh();
+        }
+
+        private void SetConstantObjectColor(object sender, EventArgs e)
+        {
+            colorsForPolygonFill.ObjectColor = IoColorBox.BackColor;
+            colorsForPolygonFill.ObjectColorOption = ObjectColorOption.Constant;
+            drawingArea.Refresh();
+        }
+
+        private void SetObjectColorFromTexture(object sender, EventArgs e)
+        {
+            colorsForPolygonFill.ObjectColorOption = ObjectColorOption.FromTexture;
+            drawingArea.Refresh();
+        }
+
+        private void UpdateVisibleAreaSize(object sender, EventArgs e)
+        {
+            colorsForPolygonFill.VisibleAreaDimensions = drawingArea.Size;
+            drawingArea.Refresh();
         }
 
         private void ChangeHeightMap(object sender, EventArgs e)
         {
             if (TextureFileDialog.ShowDialog() == DialogResult.OK)
             {
+                Bitmap bitmap = new Bitmap(TextureFileDialog.FileName);
                 DisruptionVectorTextureBox.BackgroundImage = Image.FromFile(TextureFileDialog.FileName);
+                colorsForPolygonFill.SetHeightMap(bitmap);
+                drawingArea.Refresh();
             }
         }
 
@@ -86,7 +150,10 @@ namespace PolygonFiller
         {
             if (TextureFileDialog.ShowDialog() == DialogResult.OK)
             {
-                NormalVectorTextureBox.BackgroundImage = Image.FromFile(TextureFileDialog.FileName);
+                Bitmap bitmap = new Bitmap(TextureFileDialog.FileName);
+                NormalVectorTextureBox.BackgroundImage = bitmap;
+                colorsForPolygonFill.SetNormalMap(bitmap);
+                drawingArea.Refresh();
             }
         }
 
@@ -94,10 +161,11 @@ namespace PolygonFiller
         {
             if (TextureFileDialog.ShowDialog() == DialogResult.OK)
             {
+                Bitmap oldImage = IoTextureBox.BackgroundImage as Bitmap;
                 Bitmap bitmap = new Bitmap(TextureFileDialog.FileName);
                 IoTextureBox.BackgroundImage = bitmap;
-                colorsForPolygonFill.ChangeObjectTexture(bitmap);
-                colorsForPolygonFill.ObjectColorOption = ObjectColorOption.FromTexture;
+                colorsForPolygonFill.SetObjectTexture(bitmap);
+                oldImage?.Dispose();
                 drawingArea.Refresh();
             }
         }
@@ -108,7 +176,6 @@ namespace PolygonFiller
             {
                 IoColorBox.BackColor = ColorDialog.Color;
                 colorsForPolygonFill.ObjectColor = ColorDialog.Color;
-                colorsForPolygonFill.ObjectColorOption = ObjectColorOption.Constant;
                 drawingArea.Refresh();
             }
         }
@@ -118,6 +185,8 @@ namespace PolygonFiller
             if (ColorDialog.ShowDialog() == DialogResult.OK)
             {
                 ILColorBox.BackColor = ColorDialog.Color;
+                colorsForPolygonFill.LightColor = new Vector3(ColorDialog.Color.R / 255f, ColorDialog.Color.G / 255f, ColorDialog.Color.B / 255f);
+                drawingArea.Refresh();
             }
         }
 
@@ -139,8 +208,9 @@ namespace PolygonFiller
                 directBitmaps.TryAdd(polygon, PolygonFill.GetPolygonFillDirectBitmap(polygon, colorsForPolygonFill));
             });
 
-            foreach (var polygon in polygons)
+            for (int i = polygons.Count - 1; i >= 0; i--)
             {
+                IPolygon polygon = polygons[i];
                 standardPolygonDrawer.FillPolygon(e.Graphics, polygon, directBitmaps[polygon]);
                 directBitmaps[polygon].Dispose();
 

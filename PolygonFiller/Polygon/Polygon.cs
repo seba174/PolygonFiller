@@ -39,31 +39,5 @@ namespace PolygonFiller
             original.Position = new Point(original.Position.X + offset.X, original.Position.Y + offset.Y);
             return true;
         }
-
-        public bool IsPolygonMovingPermitted(Point offset, Rectangle area)
-        {
-            foreach (var vertice in Vertices)
-            {
-                if (!IsMovingVerticeByOffsetPermitted(vertice, offset, area))
-                    return false;
-            }
-            return true;
-        }
-
-        public bool IsClickableMovingPermitted(IClickable clickable, Point offset, Rectangle area)
-        {
-            if (clickable is Vertice vertice)
-            {
-                return IsMovingVerticeByOffsetPermitted(vertice, offset, area);
-            }
-            return false;
-        }
-
-        private bool IsMovingVerticeByOffsetPermitted(Vertice vertice, Point offset, Rectangle area)
-        {
-            var position = vertice.Position;
-            position.Offset(offset);
-            return area.Contains(position);
-        }
     }
 }

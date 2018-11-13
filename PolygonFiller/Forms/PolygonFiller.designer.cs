@@ -49,38 +49,38 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.radioButton2 = new System.Windows.Forms.RadioButton();
-            this.radioButton1 = new System.Windows.Forms.RadioButton();
+            this.ObjectColorFromTexture = new System.Windows.Forms.RadioButton();
+            this.ObjectColorSingle = new System.Windows.Forms.RadioButton();
             this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
             this.IoTextureBox = new System.Windows.Forms.PictureBox();
             this.IoColorBox = new System.Windows.Forms.PictureBox();
             this.tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
-            this.ObjectTextureButton = new System.Windows.Forms.Button();
-            this.ObjectColorButton = new System.Windows.Forms.Button();
+            this.SetObjectTextureButton = new System.Windows.Forms.Button();
+            this.SetObjectColorButton = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanel7 = new System.Windows.Forms.TableLayoutPanel();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanel11 = new System.Windows.Forms.TableLayoutPanel();
             this.panel3 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel14 = new System.Windows.Forms.TableLayoutPanel();
-            this.radioButton6 = new System.Windows.Forms.RadioButton();
-            this.radioButton5 = new System.Windows.Forms.RadioButton();
+            this.DisruptionVectorFromTexture = new System.Windows.Forms.RadioButton();
+            this.DisruptionVectorConstant = new System.Windows.Forms.RadioButton();
             this.tableLayoutPanel12 = new System.Windows.Forms.TableLayoutPanel();
             this.DisruptionVectorTextureBox = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
             this.tableLayoutPanel13 = new System.Windows.Forms.TableLayoutPanel();
-            this.DisruptionVectorTextureButton = new System.Windows.Forms.Button();
+            this.SetHeightMapButton = new System.Windows.Forms.Button();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanel8 = new System.Windows.Forms.TableLayoutPanel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel15 = new System.Windows.Forms.TableLayoutPanel();
-            this.radioButton4 = new System.Windows.Forms.RadioButton();
-            this.radioButton3 = new System.Windows.Forms.RadioButton();
+            this.NormalVectorFromTexture = new System.Windows.Forms.RadioButton();
+            this.NormalVectorConstant = new System.Windows.Forms.RadioButton();
             this.tableLayoutPanel9 = new System.Windows.Forms.TableLayoutPanel();
             this.NormalVectorTextureBox = new System.Windows.Forms.PictureBox();
             this.label2 = new System.Windows.Forms.Label();
             this.tableLayoutPanel10 = new System.Windows.Forms.TableLayoutPanel();
-            this.NormalVectorTextureButton = new System.Windows.Forms.Button();
+            this.SetNormalMapButton = new System.Windows.Forms.Button();
             this.ColorDialog = new System.Windows.Forms.ColorDialog();
             this.TextureFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.tableLayoutPanel1.SuspendLayout();
@@ -381,37 +381,37 @@
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.radioButton2);
-            this.panel1.Controls.Add(this.radioButton1);
+            this.panel1.Controls.Add(this.ObjectColorFromTexture);
+            this.panel1.Controls.Add(this.ObjectColorSingle);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(3, 3);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(90, 82);
             this.panel1.TabIndex = 0;
             // 
-            // radioButton2
+            // ObjectColorFromTexture
             // 
-            this.radioButton2.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.radioButton2.AutoSize = true;
-            this.radioButton2.Location = new System.Drawing.Point(3, 53);
-            this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(72, 17);
-            this.radioButton2.TabIndex = 1;
-            this.radioButton2.Text = "Z tekstury";
-            this.radioButton2.UseVisualStyleBackColor = true;
+            this.ObjectColorFromTexture.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.ObjectColorFromTexture.AutoSize = true;
+            this.ObjectColorFromTexture.Location = new System.Drawing.Point(3, 53);
+            this.ObjectColorFromTexture.Name = "ObjectColorFromTexture";
+            this.ObjectColorFromTexture.Size = new System.Drawing.Size(72, 17);
+            this.ObjectColorFromTexture.TabIndex = 1;
+            this.ObjectColorFromTexture.Text = "Z tekstury";
+            this.ObjectColorFromTexture.UseVisualStyleBackColor = true;
             // 
-            // radioButton1
+            // ObjectColorSingle
             // 
-            this.radioButton1.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.radioButton1.AutoSize = true;
-            this.radioButton1.Checked = true;
-            this.radioButton1.Location = new System.Drawing.Point(3, 12);
-            this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(50, 17);
-            this.radioButton1.TabIndex = 0;
-            this.radioButton1.TabStop = true;
-            this.radioButton1.Text = "Stały";
-            this.radioButton1.UseVisualStyleBackColor = true;
+            this.ObjectColorSingle.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.ObjectColorSingle.AutoSize = true;
+            this.ObjectColorSingle.Checked = true;
+            this.ObjectColorSingle.Location = new System.Drawing.Point(3, 12);
+            this.ObjectColorSingle.Name = "ObjectColorSingle";
+            this.ObjectColorSingle.Size = new System.Drawing.Size(50, 17);
+            this.ObjectColorSingle.TabIndex = 0;
+            this.ObjectColorSingle.TabStop = true;
+            this.ObjectColorSingle.Text = "Stały";
+            this.ObjectColorSingle.UseVisualStyleBackColor = true;
             // 
             // tableLayoutPanel5
             // 
@@ -453,8 +453,8 @@
             // 
             this.tableLayoutPanel6.ColumnCount = 1;
             this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel6.Controls.Add(this.ObjectTextureButton, 0, 1);
-            this.tableLayoutPanel6.Controls.Add(this.ObjectColorButton, 0, 0);
+            this.tableLayoutPanel6.Controls.Add(this.SetObjectTextureButton, 0, 1);
+            this.tableLayoutPanel6.Controls.Add(this.SetObjectColorButton, 0, 0);
             this.tableLayoutPanel6.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel6.Location = new System.Drawing.Point(180, 3);
             this.tableLayoutPanel6.Name = "tableLayoutPanel6";
@@ -464,33 +464,33 @@
             this.tableLayoutPanel6.Size = new System.Drawing.Size(93, 82);
             this.tableLayoutPanel6.TabIndex = 2;
             // 
-            // ObjectTextureButton
+            // SetObjectTextureButton
             // 
-            this.ObjectTextureButton.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.ObjectTextureButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.ObjectTextureButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.ObjectTextureButton.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.ObjectTextureButton.Location = new System.Drawing.Point(9, 50);
-            this.ObjectTextureButton.Name = "ObjectTextureButton";
-            this.ObjectTextureButton.Size = new System.Drawing.Size(75, 23);
-            this.ObjectTextureButton.TabIndex = 2;
-            this.ObjectTextureButton.TabStop = false;
-            this.ObjectTextureButton.Text = "Zmień";
-            this.ObjectTextureButton.UseVisualStyleBackColor = false;
+            this.SetObjectTextureButton.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.SetObjectTextureButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.SetObjectTextureButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.SetObjectTextureButton.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.SetObjectTextureButton.Location = new System.Drawing.Point(9, 50);
+            this.SetObjectTextureButton.Name = "SetObjectTextureButton";
+            this.SetObjectTextureButton.Size = new System.Drawing.Size(75, 23);
+            this.SetObjectTextureButton.TabIndex = 2;
+            this.SetObjectTextureButton.TabStop = false;
+            this.SetObjectTextureButton.Text = "Zmień";
+            this.SetObjectTextureButton.UseVisualStyleBackColor = false;
             // 
-            // ObjectColorButton
+            // SetObjectColorButton
             // 
-            this.ObjectColorButton.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.ObjectColorButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.ObjectColorButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.ObjectColorButton.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.ObjectColorButton.Location = new System.Drawing.Point(9, 9);
-            this.ObjectColorButton.Name = "ObjectColorButton";
-            this.ObjectColorButton.Size = new System.Drawing.Size(75, 23);
-            this.ObjectColorButton.TabIndex = 1;
-            this.ObjectColorButton.TabStop = false;
-            this.ObjectColorButton.Text = "Zmień";
-            this.ObjectColorButton.UseVisualStyleBackColor = false;
+            this.SetObjectColorButton.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.SetObjectColorButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.SetObjectColorButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.SetObjectColorButton.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.SetObjectColorButton.Location = new System.Drawing.Point(9, 9);
+            this.SetObjectColorButton.Name = "SetObjectColorButton";
+            this.SetObjectColorButton.Size = new System.Drawing.Size(75, 23);
+            this.SetObjectColorButton.TabIndex = 1;
+            this.SetObjectColorButton.TabStop = false;
+            this.SetObjectColorButton.Text = "Zmień";
+            this.SetObjectColorButton.UseVisualStyleBackColor = false;
             // 
             // groupBox3
             // 
@@ -562,8 +562,8 @@
             // 
             this.tableLayoutPanel14.ColumnCount = 1;
             this.tableLayoutPanel14.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel14.Controls.Add(this.radioButton6, 0, 1);
-            this.tableLayoutPanel14.Controls.Add(this.radioButton5, 0, 0);
+            this.tableLayoutPanel14.Controls.Add(this.DisruptionVectorFromTexture, 0, 1);
+            this.tableLayoutPanel14.Controls.Add(this.DisruptionVectorConstant, 0, 0);
             this.tableLayoutPanel14.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel14.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel14.Name = "tableLayoutPanel14";
@@ -573,29 +573,29 @@
             this.tableLayoutPanel14.Size = new System.Drawing.Size(90, 82);
             this.tableLayoutPanel14.TabIndex = 0;
             // 
-            // radioButton6
+            // DisruptionVectorFromTexture
             // 
-            this.radioButton6.AutoSize = true;
-            this.radioButton6.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.radioButton6.Location = new System.Drawing.Point(3, 44);
-            this.radioButton6.Name = "radioButton6";
-            this.radioButton6.Size = new System.Drawing.Size(84, 35);
-            this.radioButton6.TabIndex = 2;
-            this.radioButton6.Text = "Z tekstury Height Map";
-            this.radioButton6.UseVisualStyleBackColor = true;
+            this.DisruptionVectorFromTexture.AutoSize = true;
+            this.DisruptionVectorFromTexture.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.DisruptionVectorFromTexture.Location = new System.Drawing.Point(3, 44);
+            this.DisruptionVectorFromTexture.Name = "DisruptionVectorFromTexture";
+            this.DisruptionVectorFromTexture.Size = new System.Drawing.Size(84, 35);
+            this.DisruptionVectorFromTexture.TabIndex = 2;
+            this.DisruptionVectorFromTexture.Text = "Z tekstury Height Map";
+            this.DisruptionVectorFromTexture.UseVisualStyleBackColor = true;
             // 
-            // radioButton5
+            // DisruptionVectorConstant
             // 
-            this.radioButton5.AutoSize = true;
-            this.radioButton5.Checked = true;
-            this.radioButton5.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.radioButton5.Location = new System.Drawing.Point(3, 3);
-            this.radioButton5.Name = "radioButton5";
-            this.radioButton5.Size = new System.Drawing.Size(84, 35);
-            this.radioButton5.TabIndex = 1;
-            this.radioButton5.TabStop = true;
-            this.radioButton5.Text = "Brak";
-            this.radioButton5.UseVisualStyleBackColor = true;
+            this.DisruptionVectorConstant.AutoSize = true;
+            this.DisruptionVectorConstant.Checked = true;
+            this.DisruptionVectorConstant.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.DisruptionVectorConstant.Location = new System.Drawing.Point(3, 3);
+            this.DisruptionVectorConstant.Name = "DisruptionVectorConstant";
+            this.DisruptionVectorConstant.Size = new System.Drawing.Size(84, 35);
+            this.DisruptionVectorConstant.TabIndex = 1;
+            this.DisruptionVectorConstant.TabStop = true;
+            this.DisruptionVectorConstant.Text = "Brak";
+            this.DisruptionVectorConstant.UseVisualStyleBackColor = true;
             // 
             // tableLayoutPanel12
             // 
@@ -639,7 +639,7 @@
             // 
             this.tableLayoutPanel13.ColumnCount = 1;
             this.tableLayoutPanel13.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel13.Controls.Add(this.DisruptionVectorTextureButton, 0, 1);
+            this.tableLayoutPanel13.Controls.Add(this.SetHeightMapButton, 0, 1);
             this.tableLayoutPanel13.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel13.Location = new System.Drawing.Point(174, 3);
             this.tableLayoutPanel13.Name = "tableLayoutPanel13";
@@ -649,19 +649,19 @@
             this.tableLayoutPanel13.Size = new System.Drawing.Size(87, 82);
             this.tableLayoutPanel13.TabIndex = 2;
             // 
-            // DisruptionVectorTextureButton
+            // SetHeightMapButton
             // 
-            this.DisruptionVectorTextureButton.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.DisruptionVectorTextureButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.DisruptionVectorTextureButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.DisruptionVectorTextureButton.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.DisruptionVectorTextureButton.Location = new System.Drawing.Point(6, 50);
-            this.DisruptionVectorTextureButton.Name = "DisruptionVectorTextureButton";
-            this.DisruptionVectorTextureButton.Size = new System.Drawing.Size(75, 23);
-            this.DisruptionVectorTextureButton.TabIndex = 2;
-            this.DisruptionVectorTextureButton.TabStop = false;
-            this.DisruptionVectorTextureButton.Text = "Zmień";
-            this.DisruptionVectorTextureButton.UseVisualStyleBackColor = false;
+            this.SetHeightMapButton.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.SetHeightMapButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.SetHeightMapButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.SetHeightMapButton.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.SetHeightMapButton.Location = new System.Drawing.Point(6, 50);
+            this.SetHeightMapButton.Name = "SetHeightMapButton";
+            this.SetHeightMapButton.Size = new System.Drawing.Size(75, 23);
+            this.SetHeightMapButton.TabIndex = 2;
+            this.SetHeightMapButton.TabStop = false;
+            this.SetHeightMapButton.Text = "Zmień";
+            this.SetHeightMapButton.UseVisualStyleBackColor = false;
             // 
             // groupBox4
             // 
@@ -705,8 +705,8 @@
             // 
             this.tableLayoutPanel15.ColumnCount = 1;
             this.tableLayoutPanel15.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel15.Controls.Add(this.radioButton4, 0, 1);
-            this.tableLayoutPanel15.Controls.Add(this.radioButton3, 0, 0);
+            this.tableLayoutPanel15.Controls.Add(this.NormalVectorFromTexture, 0, 1);
+            this.tableLayoutPanel15.Controls.Add(this.NormalVectorConstant, 0, 0);
             this.tableLayoutPanel15.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel15.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel15.Name = "tableLayoutPanel15";
@@ -716,29 +716,29 @@
             this.tableLayoutPanel15.Size = new System.Drawing.Size(90, 82);
             this.tableLayoutPanel15.TabIndex = 0;
             // 
-            // radioButton4
+            // NormalVectorFromTexture
             // 
-            this.radioButton4.AutoSize = true;
-            this.radioButton4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.radioButton4.Location = new System.Drawing.Point(3, 44);
-            this.radioButton4.Name = "radioButton4";
-            this.radioButton4.Size = new System.Drawing.Size(84, 35);
-            this.radioButton4.TabIndex = 3;
-            this.radioButton4.Text = "Z tekstury Normal Map";
-            this.radioButton4.UseVisualStyleBackColor = true;
+            this.NormalVectorFromTexture.AutoSize = true;
+            this.NormalVectorFromTexture.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.NormalVectorFromTexture.Location = new System.Drawing.Point(3, 44);
+            this.NormalVectorFromTexture.Name = "NormalVectorFromTexture";
+            this.NormalVectorFromTexture.Size = new System.Drawing.Size(84, 35);
+            this.NormalVectorFromTexture.TabIndex = 3;
+            this.NormalVectorFromTexture.Text = "Z tekstury Normal Map";
+            this.NormalVectorFromTexture.UseVisualStyleBackColor = true;
             // 
-            // radioButton3
+            // NormalVectorConstant
             // 
-            this.radioButton3.AutoSize = true;
-            this.radioButton3.Checked = true;
-            this.radioButton3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.radioButton3.Location = new System.Drawing.Point(3, 3);
-            this.radioButton3.Name = "radioButton3";
-            this.radioButton3.Size = new System.Drawing.Size(84, 35);
-            this.radioButton3.TabIndex = 2;
-            this.radioButton3.TabStop = true;
-            this.radioButton3.Text = "Stały";
-            this.radioButton3.UseVisualStyleBackColor = true;
+            this.NormalVectorConstant.AutoSize = true;
+            this.NormalVectorConstant.Checked = true;
+            this.NormalVectorConstant.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.NormalVectorConstant.Location = new System.Drawing.Point(3, 3);
+            this.NormalVectorConstant.Name = "NormalVectorConstant";
+            this.NormalVectorConstant.Size = new System.Drawing.Size(84, 35);
+            this.NormalVectorConstant.TabIndex = 2;
+            this.NormalVectorConstant.TabStop = true;
+            this.NormalVectorConstant.Text = "Stały";
+            this.NormalVectorConstant.UseVisualStyleBackColor = true;
             // 
             // tableLayoutPanel9
             // 
@@ -782,7 +782,7 @@
             // 
             this.tableLayoutPanel10.ColumnCount = 1;
             this.tableLayoutPanel10.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel10.Controls.Add(this.NormalVectorTextureButton, 0, 1);
+            this.tableLayoutPanel10.Controls.Add(this.SetNormalMapButton, 0, 1);
             this.tableLayoutPanel10.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel10.Location = new System.Drawing.Point(174, 3);
             this.tableLayoutPanel10.Name = "tableLayoutPanel10";
@@ -792,19 +792,19 @@
             this.tableLayoutPanel10.Size = new System.Drawing.Size(87, 82);
             this.tableLayoutPanel10.TabIndex = 2;
             // 
-            // NormalVectorTextureButton
+            // SetNormalMapButton
             // 
-            this.NormalVectorTextureButton.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.NormalVectorTextureButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.NormalVectorTextureButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.NormalVectorTextureButton.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.NormalVectorTextureButton.Location = new System.Drawing.Point(6, 50);
-            this.NormalVectorTextureButton.Name = "NormalVectorTextureButton";
-            this.NormalVectorTextureButton.Size = new System.Drawing.Size(75, 23);
-            this.NormalVectorTextureButton.TabIndex = 2;
-            this.NormalVectorTextureButton.TabStop = false;
-            this.NormalVectorTextureButton.Text = "Zmień";
-            this.NormalVectorTextureButton.UseVisualStyleBackColor = false;
+            this.SetNormalMapButton.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.SetNormalMapButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.SetNormalMapButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.SetNormalMapButton.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.SetNormalMapButton.Location = new System.Drawing.Point(6, 50);
+            this.SetNormalMapButton.Name = "SetNormalMapButton";
+            this.SetNormalMapButton.Size = new System.Drawing.Size(75, 23);
+            this.SetNormalMapButton.TabIndex = 2;
+            this.SetNormalMapButton.TabStop = false;
+            this.SetNormalMapButton.Text = "Zmień";
+            this.SetNormalMapButton.UseVisualStyleBackColor = false;
             // 
             // TextureFileDialog
             // 
@@ -881,14 +881,14 @@
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel4;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.RadioButton radioButton2;
-        private System.Windows.Forms.RadioButton radioButton1;
+        private System.Windows.Forms.RadioButton ObjectColorFromTexture;
+        private System.Windows.Forms.RadioButton ObjectColorSingle;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel5;
         private System.Windows.Forms.PictureBox IoTextureBox;
         private System.Windows.Forms.PictureBox IoColorBox;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel6;
-        private System.Windows.Forms.Button ObjectTextureButton;
-        private System.Windows.Forms.Button ObjectColorButton;
+        private System.Windows.Forms.Button SetObjectTextureButton;
+        private System.Windows.Forms.Button SetObjectColorButton;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel7;
         private System.Windows.Forms.GroupBox groupBox4;
@@ -900,19 +900,19 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel12;
         private System.Windows.Forms.PictureBox DisruptionVectorTextureBox;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel13;
-        private System.Windows.Forms.Button DisruptionVectorTextureButton;
+        private System.Windows.Forms.Button SetHeightMapButton;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel14;
-        private System.Windows.Forms.RadioButton radioButton6;
-        private System.Windows.Forms.RadioButton radioButton5;
+        private System.Windows.Forms.RadioButton DisruptionVectorFromTexture;
+        private System.Windows.Forms.RadioButton DisruptionVectorConstant;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel15;
-        private System.Windows.Forms.RadioButton radioButton4;
-        private System.Windows.Forms.RadioButton radioButton3;
+        private System.Windows.Forms.RadioButton NormalVectorFromTexture;
+        private System.Windows.Forms.RadioButton NormalVectorConstant;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel10;
-        private System.Windows.Forms.Button NormalVectorTextureButton;
+        private System.Windows.Forms.Button SetNormalMapButton;
         private System.Windows.Forms.GroupBox groupBox6;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel16;
         private System.Windows.Forms.Panel panel4;

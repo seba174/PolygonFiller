@@ -6,7 +6,7 @@ namespace PolygonFiller
 {
     public unsafe class FastBitmap : IDisposable
     {
-        private readonly Bitmap bitmap;
+        public Bitmap Bitmap { get; private set; }
         private BitmapData bitmapData;
         private byte* scan0;
 
@@ -18,7 +18,7 @@ namespace PolygonFiller
 
         public FastBitmap(Bitmap bitmap)
         {
-            this.bitmap = bitmap;
+            this.Bitmap = bitmap;
 
             Width = bitmap.Width;
             Height = bitmap.Height;
@@ -40,6 +40,30 @@ namespace PolygonFiller
             }
         }
 
+        public void SetPixel(int x, int y, Color color)
+        {
+            byte* currentLine = scan0 + (y * bitmapData.Stride);
+            x *= BytesPerPixel;
+
+            switch (Depth)
+            {
+                case 32:
+                    currentLine[x + 3] = color.A;
+                    currentLine[x + 2] = color.R;
+                    currentLine[x + 1] = color.G;
+                    currentLine[x] = color.B;
+                    break;
+                case 24:
+                    currentLine[x + 2] = color.R;
+                    currentLine[x + 1] = color.G;
+                    currentLine[x] = color.B;
+                    break;
+                default:
+                    currentLine[x] = color.R;
+                    break;
+            }
+        }
+
         public void Lock()
         {
             if (Locked)
@@ -47,11 +71,11 @@ namespace PolygonFiller
                 throw new InvalidOperationException("Bitmap is already locked");
             }
 
-            var rect = new Rectangle(0, 0, bitmap.Width, bitmap.Height);
-            bitmapData = bitmap.LockBits(rect, ImageLockMode.ReadWrite, bitmap.PixelFormat);
+            var rect = new Rectangle(0, 0, Bitmap.Width, Bitmap.Height);
+            bitmapData = Bitmap.LockBits(rect, ImageLockMode.ReadWrite, Bitmap.PixelFormat);
             scan0 = (byte*)bitmapData.Scan0;
 
-            Depth = Image.GetPixelFormatSize(bitmap.PixelFormat);
+            Depth = Image.GetPixelFormatSize(Bitmap.PixelFormat);
             BytesPerPixel = Depth / 8;
             Locked = true;
         }
@@ -63,7 +87,7 @@ namespace PolygonFiller
                 throw new InvalidOperationException("Bitmap is not locked");
             }
 
-            bitmap.UnlockBits(bitmapData);
+            Bitmap.UnlockBits(bitmapData);
             Locked = false;
         }
 
@@ -75,6 +99,7 @@ namespace PolygonFiller
             }
         }
     }
+
 
     public static class FastBitmapExtensions
     {
