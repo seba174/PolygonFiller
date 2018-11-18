@@ -36,12 +36,11 @@
             this.tableLayoutPanel16 = new System.Windows.Forms.TableLayoutPanel();
             this.panel4 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel17 = new System.Windows.Forms.TableLayoutPanel();
-            this.radioButton7 = new System.Windows.Forms.RadioButton();
-            this.radioButton8 = new System.Windows.Forms.RadioButton();
+            this.VectorToLightAnimated = new System.Windows.Forms.RadioButton();
+            this.VectorToLightConstant = new System.Windows.Forms.RadioButton();
             this.tableLayoutPanel18 = new System.Windows.Forms.TableLayoutPanel();
             this.label3 = new System.Windows.Forms.Label();
             this.tableLayoutPanel19 = new System.Windows.Forms.TableLayoutPanel();
-            this.button4 = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.LightColorButton = new System.Windows.Forms.Button();
@@ -83,6 +82,8 @@
             this.SetNormalMapButton = new System.Windows.Forms.Button();
             this.ColorDialog = new System.Windows.Forms.ColorDialog();
             this.TextureFileDialog = new System.Windows.Forms.OpenFileDialog();
+            this.label4 = new System.Windows.Forms.Label();
+            this.RadiusTextBox = new System.Windows.Forms.TextBox();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.drawingArea)).BeginInit();
             this.tableLayoutPanel2.SuspendLayout();
@@ -212,8 +213,8 @@
             // 
             this.tableLayoutPanel17.ColumnCount = 1;
             this.tableLayoutPanel17.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel17.Controls.Add(this.radioButton7, 0, 1);
-            this.tableLayoutPanel17.Controls.Add(this.radioButton8, 0, 0);
+            this.tableLayoutPanel17.Controls.Add(this.VectorToLightAnimated, 0, 1);
+            this.tableLayoutPanel17.Controls.Add(this.VectorToLightConstant, 0, 0);
             this.tableLayoutPanel17.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel17.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel17.Name = "tableLayoutPanel17";
@@ -223,35 +224,35 @@
             this.tableLayoutPanel17.Size = new System.Drawing.Size(90, 82);
             this.tableLayoutPanel17.TabIndex = 0;
             // 
-            // radioButton7
+            // VectorToLightAnimated
             // 
-            this.radioButton7.AutoSize = true;
-            this.radioButton7.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.radioButton7.Location = new System.Drawing.Point(3, 44);
-            this.radioButton7.Name = "radioButton7";
-            this.radioButton7.Size = new System.Drawing.Size(84, 35);
-            this.radioButton7.TabIndex = 3;
-            this.radioButton7.Text = "Animowany po sferze";
-            this.radioButton7.UseVisualStyleBackColor = true;
+            this.VectorToLightAnimated.AutoSize = true;
+            this.VectorToLightAnimated.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.VectorToLightAnimated.Location = new System.Drawing.Point(3, 44);
+            this.VectorToLightAnimated.Name = "VectorToLightAnimated";
+            this.VectorToLightAnimated.Size = new System.Drawing.Size(84, 35);
+            this.VectorToLightAnimated.TabIndex = 3;
+            this.VectorToLightAnimated.Text = "Animowany po sferze";
+            this.VectorToLightAnimated.UseVisualStyleBackColor = true;
             // 
-            // radioButton8
+            // VectorToLightConstant
             // 
-            this.radioButton8.AutoSize = true;
-            this.radioButton8.Checked = true;
-            this.radioButton8.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.radioButton8.Location = new System.Drawing.Point(3, 3);
-            this.radioButton8.Name = "radioButton8";
-            this.radioButton8.Size = new System.Drawing.Size(84, 35);
-            this.radioButton8.TabIndex = 2;
-            this.radioButton8.TabStop = true;
-            this.radioButton8.Text = "Stały";
-            this.radioButton8.UseVisualStyleBackColor = true;
+            this.VectorToLightConstant.AutoSize = true;
+            this.VectorToLightConstant.Checked = true;
+            this.VectorToLightConstant.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.VectorToLightConstant.Location = new System.Drawing.Point(3, 3);
+            this.VectorToLightConstant.Name = "VectorToLightConstant";
+            this.VectorToLightConstant.Size = new System.Drawing.Size(84, 35);
+            this.VectorToLightConstant.TabIndex = 2;
+            this.VectorToLightConstant.Text = "Stały";
+            this.VectorToLightConstant.UseVisualStyleBackColor = true;
             // 
             // tableLayoutPanel18
             // 
             this.tableLayoutPanel18.ColumnCount = 1;
             this.tableLayoutPanel18.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel18.Controls.Add(this.label3, 0, 0);
+            this.tableLayoutPanel18.Controls.Add(this.label4, 0, 1);
             this.tableLayoutPanel18.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel18.Location = new System.Drawing.Point(99, 3);
             this.tableLayoutPanel18.Name = "tableLayoutPanel18";
@@ -277,7 +278,7 @@
             // 
             this.tableLayoutPanel19.ColumnCount = 1;
             this.tableLayoutPanel19.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel19.Controls.Add(this.button4, 0, 1);
+            this.tableLayoutPanel19.Controls.Add(this.RadiusTextBox, 0, 1);
             this.tableLayoutPanel19.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel19.Location = new System.Drawing.Point(180, 3);
             this.tableLayoutPanel19.Name = "tableLayoutPanel19";
@@ -286,20 +287,6 @@
             this.tableLayoutPanel19.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel19.Size = new System.Drawing.Size(93, 82);
             this.tableLayoutPanel19.TabIndex = 2;
-            // 
-            // button4
-            // 
-            this.button4.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.button4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button4.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.button4.Location = new System.Drawing.Point(9, 50);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(75, 23);
-            this.button4.TabIndex = 2;
-            this.button4.TabStop = false;
-            this.button4.Text = "Zmień";
-            this.button4.UseVisualStyleBackColor = false;
             // 
             // groupBox1
             // 
@@ -409,7 +396,6 @@
             this.ObjectColorSingle.Name = "ObjectColorSingle";
             this.ObjectColorSingle.Size = new System.Drawing.Size(50, 17);
             this.ObjectColorSingle.TabIndex = 0;
-            this.ObjectColorSingle.TabStop = true;
             this.ObjectColorSingle.Text = "Stały";
             this.ObjectColorSingle.UseVisualStyleBackColor = true;
             // 
@@ -593,7 +579,6 @@
             this.DisruptionVectorConstant.Name = "DisruptionVectorConstant";
             this.DisruptionVectorConstant.Size = new System.Drawing.Size(84, 35);
             this.DisruptionVectorConstant.TabIndex = 1;
-            this.DisruptionVectorConstant.TabStop = true;
             this.DisruptionVectorConstant.Text = "Brak";
             this.DisruptionVectorConstant.UseVisualStyleBackColor = true;
             // 
@@ -736,7 +721,6 @@
             this.NormalVectorConstant.Name = "NormalVectorConstant";
             this.NormalVectorConstant.Size = new System.Drawing.Size(84, 35);
             this.NormalVectorConstant.TabIndex = 2;
-            this.NormalVectorConstant.TabStop = true;
             this.NormalVectorConstant.Text = "Stały";
             this.NormalVectorConstant.UseVisualStyleBackColor = true;
             // 
@@ -810,6 +794,25 @@
             // 
             this.TextureFileDialog.Filter = "Images | *.jpg; *.jpeg; *.png ; *.bmp; *.gif";
             // 
+            // label4
+            // 
+            this.label4.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(10, 55);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(54, 13);
+            this.label4.TabIndex = 5;
+            this.label4.Text = "Promień =";
+            // 
+            // RadiusTextBox
+            // 
+            this.RadiusTextBox.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.RadiusTextBox.Location = new System.Drawing.Point(21, 51);
+            this.RadiusTextBox.Name = "RadiusTextBox";
+            this.RadiusTextBox.Size = new System.Drawing.Size(50, 20);
+            this.RadiusTextBox.TabIndex = 0;
+            this.RadiusTextBox.TabStop = false;
+            // 
             // PolygonFiller
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -833,6 +836,7 @@
             this.tableLayoutPanel18.ResumeLayout(false);
             this.tableLayoutPanel18.PerformLayout();
             this.tableLayoutPanel19.ResumeLayout(false);
+            this.tableLayoutPanel19.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.tableLayoutPanel3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.ILColorBox)).EndInit();
@@ -917,13 +921,14 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel16;
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel17;
-        private System.Windows.Forms.RadioButton radioButton7;
-        private System.Windows.Forms.RadioButton radioButton8;
+        private System.Windows.Forms.RadioButton VectorToLightAnimated;
+        private System.Windows.Forms.RadioButton VectorToLightConstant;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel18;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel19;
-        private System.Windows.Forms.Button button4;
         private System.Windows.Forms.OpenFileDialog TextureFileDialog;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.TextBox RadiusTextBox;
     }
 }
 

@@ -8,86 +8,81 @@ namespace PolygonFiller
         public static Vector3 ConstantVectorToLight { get; set; }
         public static Vector3 ConstantNormalVector { get; set; }
         public static Vector3 ConstantDisruptionVector { get; set; }
-
-        private ObjectColorOption objectColorOption;
-        public ObjectColorOption ObjectColorOption
-        {
-            get => objectColorOption;
-            set
-            {
-                objectColorOption = value;
-                CreateCachedColors();
-            }
-        }
-        private VectorToLightOption vectorToLightOption;
+        public ObjectColorOption ObjectColorOption { get; set; }
         public VectorToLightOption VectorToLightOption { get; set; }
+        public NormalVectorOption NormalVectorOption { get; set; }
+        public DisruptionVectorOption DisruptionVectorOption { get; set; }
+        public Vector3 LightColor { get; set; }
+        public Color ObjectColor { get; set; }
+        public Vector3 LightSourcePosition { get; set; }
 
-        private NormalVectorOption normalVectorOption;
-        public NormalVectorOption NormalVectorOption
-        {
-            get => normalVectorOption;
-            set
-            {
-                normalVectorOption = value;
-                CreateCachedColors();
-            }
-        }
-        private DisruptionVectorOption disruptionVectorOption;
-        public DisruptionVectorOption DisruptionVectorOption
-        {
-            get => disruptionVectorOption;
-            set
-            {
-                disruptionVectorOption = value;
-                CreateCachedColors();
-            }
-        }
-
-        private Vector3 lightColor;
-        public Vector3 LightColor
-        {
-            get => lightColor;
-            set
-            {
-                lightColor = value;
-                CreateCachedColors();
-            }
-        }
-
-        private Color objectColor;
-        public Color ObjectColor
-        {
-            get => objectColor;
-            set
-            {
-                objectColor = value;
-                if (objectColorOption == ObjectColorOption.Constant)
-                    CreateCachedColors();
-            }
-        }
         private Color[,] colorsFromObjectTexture;
-
         private Vector3[,] normalMapVectors;
         private Vector3[,] heightMapVectors;
-
-        private Size visibleAreaDimensions;
-        public Size VisibleAreaDimensions
-        {
-            get => visibleAreaDimensions;
-            set
-            {
-                visibleAreaDimensions = value;
-                CreateCachedColors();
-            }
-        }
-        private int[,] cachedColors;
 
         public int GetColor(int x, int y)
         {
             int rx = x < 0 ? 0 : x;
             int ry = y < 0 ? 0 : y;
 
-            return cachedColors[rx % VisibleAreaDimensions.Width, ry % VisibleAreaDimensions.Height];
+            float r = LightColor.X;
+            float g = LightColor.Y;
+            float b = LightColor.Z;
+            if (ObjectColorOption == ObjectColorOption.Constant)
+            {
+                r *= ObjectColor.R;
+                g *= ObjectColor.G;
+                b *= ObjectColor.B;
+            }
+            else
+            {
+                int textureX = rx % colorsFromObjectTexture.GetLength(0);
+                int textureY = ry % colorsFromObjectTexture.GetLength(1);
+
+                r *= colorsFromObjectTexture[textureX, textureY].R;
+                g *= colorsFromObjectTexture[textureX, textureY].G;
+                b *= colorsFromObjectTexture[textureX, textureY].B;
+            }
+
+            Vector3 N;
+            if (NormalVectorOption == NormalVectorOption.Constant)
+            {
+                N = ConstantNormalVector;
+            }
+            else
+            {
+                N = normalMapVectors[rx % normalMapVectors.GetLength(0), ry % normalMapVectors.GetLength(1)];
+            }
+
+            if (DisruptionVectorOption == DisruptionVectorOption.None)
+            {
+                N += ConstantDisruptionVector;
+            }
+            else
+            {
+                N += heightMapVectors[rx % heightMapVectors.GetLength(0), ry % heightMapVectors.GetLength(1)];
+            }
+
+            N = Vector3.Normalize(N);
+
+            float cos;
+            if (VectorToLightOption == VectorToLightOption.Constant)
+            {
+                cos = N.X * ConstantVectorToLight.X + N.Y * ConstantVectorToLight.Y + N.Z * ConstantVectorToLight.Z;
+            }
+            else
+            {
+                Vector3 vectorToLight = Vector3.Normalize(new Vector3(LightSourcePosition.X - x, LightSourcePosition.Y - y, LightSourcePosition.Z));
+                cos = N.X * vectorToLight.X + N.Y * vectorToLight.Y + N.Z * vectorToLight.Z;
+            }
+
+            cos = cos < 0 ? 0 : cos;
+
+            r *= cos;
+            g *= cos;
+            b *= cos;
+
+            return 255 << 24 | ((int)r > 255 ? 255 : (int)r) << 16 | ((int)g > 255 ? 255 : (int)g) << 8 | ((int)b > 255 ? 255 : (int)b);
         }
 
         public void SetObjectTexture(Bitmap objectTexture)
@@ -102,10 +97,6 @@ namespace PolygonFiller
                         colorsFromObjectTexture[i, j] = fastBitmap.GetPixel(i, j);
                     }
                 }
-            }
-            if (objectColorOption == ObjectColorOption.FromTexture)
-            {
-                CreateCachedColors();
             }
         }
 
@@ -136,10 +127,6 @@ namespace PolygonFiller
                         }
                     }
                 }
-            }
-            if (normalVectorOption == NormalVectorOption.FromNormalMap)
-            {
-                CreateCachedColors();
             }
         }
 
@@ -174,70 +161,6 @@ namespace PolygonFiller
                             heightMapVectors[i, j] = factor * (t * dhx + b * dhy);
                         }
                     }
-                }
-            }
-            if (disruptionVectorOption == DisruptionVectorOption.FromHeightMap)
-            {
-                CreateCachedColors();
-            }
-        }
-
-        private void CreateCachedColors()
-        {
-            cachedColors = new int[VisibleAreaDimensions.Width, VisibleAreaDimensions.Height];
-            for (int x = 0; x < VisibleAreaDimensions.Width; x++)
-            {
-                for (int y = 0; y < VisibleAreaDimensions.Height; y++)
-                {
-                    float r = LightColor.X;
-                    float g = LightColor.Y;
-                    float b = LightColor.Z;
-                    if (ObjectColorOption == ObjectColorOption.Constant)
-                    {
-                        r *= ObjectColor.R;
-                        g *= ObjectColor.G;
-                        b *= ObjectColor.B;
-                    }
-                    else
-                    {
-                        int rx = x % colorsFromObjectTexture.GetLength(0);
-                        int ry = y % colorsFromObjectTexture.GetLength(1);
-
-                        r *= colorsFromObjectTexture[rx, ry].R;
-                        g *= colorsFromObjectTexture[rx, ry].G;
-                        b *= colorsFromObjectTexture[rx, ry].B;
-                    }
-
-                    Vector3 N;
-                    if (NormalVectorOption == NormalVectorOption.Constant)
-                    {
-                        N = ConstantNormalVector;
-                    }
-                    else
-                    {
-                        N = normalMapVectors[x % normalMapVectors.GetLength(0), y % normalMapVectors.GetLength(1)];
-                    }
-
-                    if (DisruptionVectorOption == DisruptionVectorOption.None)
-                    {
-                        N += ConstantDisruptionVector;
-                    }
-                    else
-                    {
-                        N += heightMapVectors[x % heightMapVectors.GetLength(0), y % heightMapVectors.GetLength(1)];
-                    }
-
-                    N = Vector3.Normalize(N);
-
-
-                    float cos = N.X * ConstantVectorToLight.X + N.Y * ConstantVectorToLight.Y + N.Z * ConstantVectorToLight.Z;
-                    cos = cos < 0 ? 0 : cos;
-
-                    r *= cos;
-                    g *= cos;
-                    b *= cos;
-
-                    cachedColors[x, y] = 255 << 24 | ((int)r > 255 ? 255 : (int)r) << 16 | ((int)g > 255 ? 255 : (int)g) << 8 | ((int)b > 255 ? 255 : (int)b);
                 }
             }
         }

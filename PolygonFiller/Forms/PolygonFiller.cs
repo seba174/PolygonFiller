@@ -16,6 +16,7 @@ namespace PolygonFiller
         private PolygonDrawer selectedElementDrawer;
         private List<IPolygon> polygons;
         private ColorsForPolygonFill colorsForPolygonFill;
+        private LightSourceGenerator lightSourceGenerator;
 
         public PolygonFiller()
         {
@@ -67,12 +68,22 @@ namespace PolygonFiller
                 NormalVectorOption = NormalVectorOption.Constant,
                 VectorToLightOption = VectorToLightOption.Constant,
                 ObjectColor = ILColorBox.BackColor,
-                LightColor = new Vector3(1, 1, 1),
-                VisibleAreaDimensions = drawingArea.Size
+                LightColor = new Vector3(1, 1, 1)
+            };
+
+            lightSourceGenerator = new LightSourceGenerator
+            {
+                AngleChange = 10,
+                HeightStepChange = 10,
+                MinHeight = 20,
+                MaxHeight = 200,
+                Radius = 300,
+                Origin = new Vector2(drawingArea.Width / 2, drawingArea.Height / 2),
+                StartingHeight = 100
             };
 
             drawingArea.Paint += Draw;
-            ResizeEnd += UpdateVisibleAreaSize;
+            drawingArea.SizeChanged += UpdateLightSourceGenerator;
 
             drawingArea.MouseDown += inputHandler.HandleMouseDown;
             drawingArea.MouseUp += inputHandler.HandleMouseUp;
@@ -90,6 +101,58 @@ namespace PolygonFiller
             NormalVectorFromTexture.Click += SetNormalVectorFromTexture;
             DisruptionVectorConstant.Click += SetDisruptionVectorConstant;
             DisruptionVectorFromTexture.Click += SetDisruptionVectorFromTexture;
+            VectorToLightConstant.Click += SetVectorToLightConstant;
+            VectorToLightAnimated.CheckedChanged += SetVectorToLightAnimated;
+
+            RadiusTextBox.Text = lightSourceGenerator.Radius.ToString();
+            RadiusTextBox.TextChanged += RadiusTextboxTextChangedHandler;
+        }
+
+        private void RadiusTextboxTextChangedHandler(object sender, EventArgs e)
+        {
+            if (uint.TryParse(RadiusTextBox.Text, out uint result) && result < int.MaxValue)
+            {
+                lightSourceGenerator.Radius = (int)result;
+            }
+            else
+            {
+                RadiusTextBox.Text = lightSourceGenerator.Radius.ToString();
+            }
+        }
+
+        private void UpdateLightSourceGenerator(object sender, EventArgs e)
+        {
+            lightSourceGenerator.Origin = new Vector2(drawingArea.Width / 2, drawingArea.Height / 2);
+        }
+
+        private async void SetVectorToLightAnimated(object sender, EventArgs e)
+        {
+            if (!VectorToLightAnimated.Checked)
+            {
+                return;
+            }
+
+            lightSourceGenerator.Reset();
+            colorsForPolygonFill.VectorToLightOption = VectorToLightOption.Variable;
+
+            while (true)
+            {
+                colorsForPolygonFill.LightSourcePosition = lightSourceGenerator.GetNextLightSourcePosition();
+                drawingArea.Refresh();
+
+                await Task.Delay(600);
+
+                if (colorsForPolygonFill.VectorToLightOption == VectorToLightOption.Constant)
+                {
+                    return;
+                }
+            }
+        }
+
+        private void SetVectorToLightConstant(object sender, EventArgs e)
+        {
+            colorsForPolygonFill.VectorToLightOption = VectorToLightOption.Constant;
+            drawingArea.Refresh();
         }
 
         private void SetDisruptionVectorFromTexture(object sender, EventArgs e)
@@ -129,19 +192,15 @@ namespace PolygonFiller
             drawingArea.Refresh();
         }
 
-        private void UpdateVisibleAreaSize(object sender, EventArgs e)
-        {
-            colorsForPolygonFill.VisibleAreaDimensions = drawingArea.Size;
-            drawingArea.Refresh();
-        }
-
         private void ChangeHeightMap(object sender, EventArgs e)
         {
             if (TextureFileDialog.ShowDialog() == DialogResult.OK)
             {
+                Bitmap oldImage = DisruptionVectorTextureBox.BackgroundImage as Bitmap;
                 Bitmap bitmap = new Bitmap(TextureFileDialog.FileName);
                 DisruptionVectorTextureBox.BackgroundImage = Image.FromFile(TextureFileDialog.FileName);
                 colorsForPolygonFill.SetHeightMap(bitmap);
+                oldImage?.Dispose();
                 drawingArea.Refresh();
             }
         }
@@ -150,9 +209,11 @@ namespace PolygonFiller
         {
             if (TextureFileDialog.ShowDialog() == DialogResult.OK)
             {
+                Bitmap oldImage = NormalVectorTextureBox.BackgroundImage as Bitmap;
                 Bitmap bitmap = new Bitmap(TextureFileDialog.FileName);
                 NormalVectorTextureBox.BackgroundImage = bitmap;
                 colorsForPolygonFill.SetNormalMap(bitmap);
+                oldImage?.Dispose();
                 drawingArea.Refresh();
             }
         }
