@@ -200,12 +200,12 @@ namespace PolygonFiller
                     }
                     else
                     {
-                        x %= colorsFromObjectTexture.GetLength(0);
-                        y %= colorsFromObjectTexture.GetLength(1);
+                        int rx = x % colorsFromObjectTexture.GetLength(0);
+                        int ry = y % colorsFromObjectTexture.GetLength(1);
 
-                        r *= colorsFromObjectTexture[x, y].R;
-                        g *= colorsFromObjectTexture[x, y].G;
-                        b *= colorsFromObjectTexture[x, y].B;
+                        r *= colorsFromObjectTexture[rx, ry].R;
+                        g *= colorsFromObjectTexture[rx, ry].G;
+                        b *= colorsFromObjectTexture[rx, ry].B;
                     }
 
                     Vector3 N;

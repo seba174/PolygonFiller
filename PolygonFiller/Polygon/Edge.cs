@@ -15,7 +15,7 @@ namespace PolygonFiller
             return endpoint == Endpoints[0] ? Endpoints[1] : Endpoints[0];
         }
 
-        bool IClickable.IsClicked(Point position)
+        public bool IsClicked(Point position)
         {
             return PointUtilities.GetDistanceFromEdge(this, position) < ClickDistance;
         }

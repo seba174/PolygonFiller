@@ -13,7 +13,7 @@ namespace PolygonFiller
 
         public Vertice(Edge edge1, Edge edge2) => Edges = new Edge[] { edge1, edge2 };
 
-        bool IClickable.IsClicked(Point position)
+        public bool IsClicked(Point position)
         {
             int dx = this.Position.X - position.X;
             int dy = this.Position.Y - position.Y;
