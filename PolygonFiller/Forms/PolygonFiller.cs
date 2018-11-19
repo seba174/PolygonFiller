@@ -162,7 +162,10 @@ namespace PolygonFiller
             lightSourceGenerator.Origin = new Vector2(drawingArea.Width / 2, drawingArea.Height / 2);
             colorsForPolygonFill.DrawingAreaSize = drawingArea.Size;
             if (colorsForPolygonFill.RGBHeadlightsEnabled)
+            {
                 colorsForPolygonFill.EnableRgbHeadlights();
+            }
+
             colorsForPolygonFill.UpdateCache();
             drawingArea.Refresh();
         }
@@ -177,7 +180,9 @@ namespace PolygonFiller
         private void TurnRgbHighlightsOnHandler(object sender, EventArgs e)
         {
             if (colorsForPolygonFill.RGBHeadlightsEnabled)
+            {
                 return;
+            }
 
             colorsForPolygonFill.EnableRgbHeadlights();
             colorsForPolygonFill.UpdateCache();
@@ -385,7 +390,10 @@ namespace PolygonFiller
                 IoColorBox.BackColor = ColorDialog.Color;
                 colorsForPolygonFill.ObjectColor = ColorDialog.Color;
                 if (colorsForPolygonFill.ObjectColorOption == ObjectColorOption.Constant)
+                {
                     colorsForPolygonFill.UpdateCache();
+                }
+
                 drawingArea.Refresh();
             }
         }

@@ -51,7 +51,9 @@ namespace PolygonFiller
                 }
             }
             if (ObjectColorOption == ObjectColorOption.FromTexture)
+            {
                 UpdateCache();
+            }
         }
 
         public void SetNormalMap(Bitmap normalMap)
@@ -83,7 +85,9 @@ namespace PolygonFiller
                 }
             }
             if (NormalVectorOption == NormalVectorOption.FromNormalMap)
+            {
                 UpdateCache();
+            }
         }
 
         public void SetHeightMap(Bitmap heightMap)
@@ -120,7 +124,9 @@ namespace PolygonFiller
                 }
             }
             if (DisruptionVectorOption == DisruptionVectorOption.FromHeightMap)
+            {
                 UpdateCache();
+            }
         }
 
         private Vector3 GetNormalVector(int x, int y)
@@ -155,10 +161,6 @@ namespace PolygonFiller
             {
                 for (int y = 0; y < DrawingAreaSize.Height; y++)
                 {
-                    if(x == DrawingAreaSize.Width/2 && y == DrawingAreaSize.Height/2)
-                    {
-
-                    }
                     int rx = x < 0 ? 0 : x;
                     int ry = y < 0 ? 0 : y;
 
@@ -312,7 +314,7 @@ namespace PolygonFiller
                     Vector3 curToR = Vector3.Normalize(new Vector3(rPos.X - i, rPos.Y - j, rPos.Z));
                     float rCos = rToMid.X * curToR.X + rToMid.Y * curToR.Y + rToMid.Z * curToR.Z;
                     rCos = System.Math.Abs((float)System.Math.Pow(rCos, CosinePower));
-       
+
                     Vector3 curToG = Vector3.Normalize(new Vector3(gPos.X - i, gPos.Y - j, gPos.Z));
                     float gCos = gToMid.X * curToG.X + gToMid.Y * curToG.Y + gToMid.Z * curToG.Z;
                     gCos = System.Math.Abs((float)System.Math.Pow(gCos, CosinePower));
