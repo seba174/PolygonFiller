@@ -58,6 +58,11 @@
     <Compile Include="Forms\PolygonFiller.designer.cs">
       <DependentUpon>PolygonFiller.cs</DependentUpon>
     </Compile>
+    <Compile Include="Images.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Images.resx</DependentUpon>
+    </Compile>
     <Compile Include="InputHandlers\DrawingAreaInputHandler.cs" />
     <Compile Include="Interfaces\IClickable.cs" />
     <Compile Include="Interfaces\IPolygon.cs" />
@@ -76,6 +81,10 @@
     <Compile Include="Polygon\Vertice.cs" />
     <EmbeddedResource Include="Forms\PolygonFiller.resx">
       <DependentUpon>PolygonFiller.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Images.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Images.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -99,6 +108,17 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="Resources\HeightMap.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\brick_heightmap.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\brick_normalmap.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\sampleTexture.jpg" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
