@@ -33,7 +33,9 @@ namespace PolygonFiller
         public void HandleMouseMove(object sender, MouseEventArgs e)
         {
             if (SelectedElement == null || SelectedPolygon == null)
+            {
                 return;
+            }
 
             Point offsetFromLastMove = new Point(e.X - selectedElementLastPosition.X, e.Y - selectedElementLastPosition.Y);
             selectedElementLastPosition = e.Location;
@@ -69,7 +71,9 @@ namespace PolygonFiller
         public void HandleMouseDown(object sender, MouseEventArgs e)
         {
             if (isLeftMouseButtonClicked || isMiddleMouseButtonClicked)
+            {
                 return;
+            }
 
             if (e.Button == MouseButtons.Left)
             {
@@ -93,7 +97,9 @@ namespace PolygonFiller
         private void SetSelectedElements(Point mousePosition)
         {
             if (HandledPolygons == null)
+            {
                 return;
+            }
 
             foreach (var polygon in HandledPolygons)
             {

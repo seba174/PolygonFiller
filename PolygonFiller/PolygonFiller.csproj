@@ -69,7 +69,7 @@
     <Compile Include="Polygon\ColorsForPolygonFill.cs" />
     <Compile Include="Polygon\Edge.cs" />
     <Compile Include="Polygon\Polygon.cs" />
-    <Compile Include="Polygon\PolygonCreator.cs" />
+    <Compile Include="Polygon\LightSourceGenerator.cs" />
     <Compile Include="Polygon\PolygonDrawer.cs" />
     <Compile Include="Polygon\PolygonFill.cs" />
     <Compile Include="Program.cs" />
@@ -107,9 +107,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\HeightMap.bmp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\brick_heightmap.jpg" />
