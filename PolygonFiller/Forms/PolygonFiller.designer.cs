@@ -44,6 +44,7 @@
             this.tableLayoutPanel23 = new System.Windows.Forms.TableLayoutPanel();
             this.HighlightsHeightTextBox = new System.Windows.Forms.TextBox();
             this.CosinePowerTextBox = new System.Windows.Forms.TextBox();
+            this.RgbHeadlightsParameterAccept = new System.Windows.Forms.Button();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanel16 = new System.Windows.Forms.TableLayoutPanel();
             this.panel4 = new System.Windows.Forms.Panel();
@@ -55,6 +56,7 @@
             this.label4 = new System.Windows.Forms.Label();
             this.tableLayoutPanel19 = new System.Windows.Forms.TableLayoutPanel();
             this.RadiusTextBox = new System.Windows.Forms.TextBox();
+            this.RadiusButtonAccept = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.LightColorButton = new System.Windows.Forms.Button();
@@ -96,8 +98,17 @@
             this.SetNormalMapButton = new System.Windows.Forms.Button();
             this.ColorDialog = new System.Windows.Forms.ColorDialog();
             this.TextureFileDialog = new System.Windows.Forms.OpenFileDialog();
-            this.RadiusButtonAccept = new System.Windows.Forms.Button();
-            this.RgbHeadlightsParameterAccept = new System.Windows.Forms.Button();
+            this.groupBox8 = new System.Windows.Forms.GroupBox();
+            this.tableLayoutPanel24 = new System.Windows.Forms.TableLayoutPanel();
+            this.panel6 = new System.Windows.Forms.Panel();
+            this.ObjectColorFromTexture2 = new System.Windows.Forms.RadioButton();
+            this.ObjectColorSingle2 = new System.Windows.Forms.RadioButton();
+            this.tableLayoutPanel25 = new System.Windows.Forms.TableLayoutPanel();
+            this.IoTextureBox2 = new System.Windows.Forms.PictureBox();
+            this.IoColorBox2 = new System.Windows.Forms.PictureBox();
+            this.tableLayoutPanel26 = new System.Windows.Forms.TableLayoutPanel();
+            this.SetObjectTextureButton2 = new System.Windows.Forms.Button();
+            this.SetObjectColorButton2 = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.drawingArea)).BeginInit();
             this.tableLayoutPanel2.SuspendLayout();
@@ -139,6 +150,13 @@
             this.tableLayoutPanel9.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.NormalVectorTextureBox)).BeginInit();
             this.tableLayoutPanel10.SuspendLayout();
+            this.groupBox8.SuspendLayout();
+            this.tableLayoutPanel24.SuspendLayout();
+            this.panel6.SuspendLayout();
+            this.tableLayoutPanel25.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.IoTextureBox2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.IoColorBox2)).BeginInit();
+            this.tableLayoutPanel26.SuspendLayout();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -157,7 +175,7 @@
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(1184, 812);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(1184, 961);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // drawingArea
@@ -166,7 +184,7 @@
             this.drawingArea.Dock = System.Windows.Forms.DockStyle.Fill;
             this.drawingArea.Location = new System.Drawing.Point(3, 3);
             this.drawingArea.Name = "drawingArea";
-            this.drawingArea.Size = new System.Drawing.Size(884, 806);
+            this.drawingArea.Size = new System.Drawing.Size(884, 955);
             this.drawingArea.TabIndex = 0;
             this.drawingArea.TabStop = false;
             // 
@@ -174,22 +192,24 @@
             // 
             this.tableLayoutPanel2.ColumnCount = 1;
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel2.Controls.Add(this.groupBox7, 0, 4);
-            this.tableLayoutPanel2.Controls.Add(this.groupBox6, 0, 3);
+            this.tableLayoutPanel2.Controls.Add(this.groupBox8, 0, 2);
+            this.tableLayoutPanel2.Controls.Add(this.groupBox7, 0, 5);
+            this.tableLayoutPanel2.Controls.Add(this.groupBox6, 0, 4);
             this.tableLayoutPanel2.Controls.Add(this.groupBox1, 0, 0);
             this.tableLayoutPanel2.Controls.Add(this.groupBox2, 0, 1);
-            this.tableLayoutPanel2.Controls.Add(this.groupBox3, 0, 2);
+            this.tableLayoutPanel2.Controls.Add(this.groupBox3, 0, 3);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel2.Location = new System.Drawing.Point(893, 3);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
-            this.tableLayoutPanel2.RowCount = 6;
+            this.tableLayoutPanel2.RowCount = 7;
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 160F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 160F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(288, 806);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(288, 955);
             this.tableLayoutPanel2.TabIndex = 1;
             // 
             // groupBox7
@@ -197,7 +217,7 @@
             this.groupBox7.Controls.Add(this.tableLayoutPanel20);
             this.groupBox7.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox7.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.groupBox7.Location = new System.Drawing.Point(3, 596);
+            this.groupBox7.Location = new System.Drawing.Point(3, 709);
             this.groupBox7.Name = "groupBox7";
             this.groupBox7.Size = new System.Drawing.Size(282, 154);
             this.groupBox7.TabIndex = 5;
@@ -342,12 +362,26 @@
             this.CosinePowerTextBox.TabIndex = 0;
             this.CosinePowerTextBox.TabStop = false;
             // 
+            // RgbHeadlightsParameterAccept
+            // 
+            this.RgbHeadlightsParameterAccept.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.RgbHeadlightsParameterAccept.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.RgbHeadlightsParameterAccept.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.RgbHeadlightsParameterAccept.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.RgbHeadlightsParameterAccept.Location = new System.Drawing.Point(189, 103);
+            this.RgbHeadlightsParameterAccept.Name = "RgbHeadlightsParameterAccept";
+            this.RgbHeadlightsParameterAccept.Size = new System.Drawing.Size(75, 23);
+            this.RgbHeadlightsParameterAccept.TabIndex = 4;
+            this.RgbHeadlightsParameterAccept.TabStop = false;
+            this.RgbHeadlightsParameterAccept.Text = "Zaktualizuj";
+            this.RgbHeadlightsParameterAccept.UseVisualStyleBackColor = false;
+            // 
             // groupBox6
             // 
             this.groupBox6.Controls.Add(this.tableLayoutPanel16);
             this.groupBox6.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox6.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.groupBox6.Location = new System.Drawing.Point(3, 436);
+            this.groupBox6.Location = new System.Drawing.Point(3, 549);
             this.groupBox6.Name = "groupBox6";
             this.groupBox6.Size = new System.Drawing.Size(282, 154);
             this.groupBox6.TabIndex = 4;
@@ -481,6 +515,20 @@
             this.RadiusTextBox.TabIndex = 0;
             this.RadiusTextBox.TabStop = false;
             // 
+            // RadiusButtonAccept
+            // 
+            this.RadiusButtonAccept.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.RadiusButtonAccept.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.RadiusButtonAccept.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.RadiusButtonAccept.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.RadiusButtonAccept.Location = new System.Drawing.Point(189, 103);
+            this.RadiusButtonAccept.Name = "RadiusButtonAccept";
+            this.RadiusButtonAccept.Size = new System.Drawing.Size(75, 23);
+            this.RadiusButtonAccept.TabIndex = 3;
+            this.RadiusButtonAccept.TabStop = false;
+            this.RadiusButtonAccept.Text = "Zaktualizuj";
+            this.RadiusButtonAccept.UseVisualStyleBackColor = false;
+            // 
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.tableLayoutPanel3);
@@ -540,7 +588,7 @@
             this.groupBox2.Size = new System.Drawing.Size(282, 107);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Kolor obiektu Io";
+            this.groupBox2.Text = "Kolor trójkąta 1 Io";
             // 
             // tableLayoutPanel4
             // 
@@ -677,7 +725,7 @@
             this.groupBox3.Controls.Add(this.tableLayoutPanel7);
             this.groupBox3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox3.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.groupBox3.Location = new System.Drawing.Point(3, 175);
+            this.groupBox3.Location = new System.Drawing.Point(3, 288);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(282, 255);
             this.groupBox3.TabIndex = 2;
@@ -990,44 +1038,157 @@
             // 
             this.TextureFileDialog.Filter = "Images | *.jpg; *.jpeg; *.png ; *.bmp; *.gif";
             // 
-            // RadiusButtonAccept
+            // groupBox8
             // 
-            this.RadiusButtonAccept.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.RadiusButtonAccept.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.RadiusButtonAccept.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.RadiusButtonAccept.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.RadiusButtonAccept.Location = new System.Drawing.Point(189, 103);
-            this.RadiusButtonAccept.Name = "RadiusButtonAccept";
-            this.RadiusButtonAccept.Size = new System.Drawing.Size(75, 23);
-            this.RadiusButtonAccept.TabIndex = 3;
-            this.RadiusButtonAccept.TabStop = false;
-            this.RadiusButtonAccept.Text = "Zaktualizuj";
-            this.RadiusButtonAccept.UseVisualStyleBackColor = false;
+            this.groupBox8.Controls.Add(this.tableLayoutPanel24);
+            this.groupBox8.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.groupBox8.Location = new System.Drawing.Point(3, 175);
+            this.groupBox8.Name = "groupBox8";
+            this.groupBox8.Size = new System.Drawing.Size(282, 107);
+            this.groupBox8.TabIndex = 6;
+            this.groupBox8.TabStop = false;
+            this.groupBox8.Text = "Kolor trojkąta 2 Io";
             // 
-            // RgbHeadlightsParameterAccept
+            // tableLayoutPanel24
             // 
-            this.RgbHeadlightsParameterAccept.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.RgbHeadlightsParameterAccept.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.RgbHeadlightsParameterAccept.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.RgbHeadlightsParameterAccept.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.RgbHeadlightsParameterAccept.Location = new System.Drawing.Point(189, 103);
-            this.RgbHeadlightsParameterAccept.Name = "RgbHeadlightsParameterAccept";
-            this.RgbHeadlightsParameterAccept.Size = new System.Drawing.Size(75, 23);
-            this.RgbHeadlightsParameterAccept.TabIndex = 4;
-            this.RgbHeadlightsParameterAccept.TabStop = false;
-            this.RgbHeadlightsParameterAccept.Text = "Zaktualizuj";
-            this.RgbHeadlightsParameterAccept.UseVisualStyleBackColor = false;
+            this.tableLayoutPanel24.ColumnCount = 3;
+            this.tableLayoutPanel24.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel24.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 45F));
+            this.tableLayoutPanel24.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 55F));
+            this.tableLayoutPanel24.Controls.Add(this.panel6, 0, 0);
+            this.tableLayoutPanel24.Controls.Add(this.tableLayoutPanel25, 1, 0);
+            this.tableLayoutPanel24.Controls.Add(this.tableLayoutPanel26, 2, 0);
+            this.tableLayoutPanel24.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel24.Location = new System.Drawing.Point(3, 16);
+            this.tableLayoutPanel24.Name = "tableLayoutPanel24";
+            this.tableLayoutPanel24.RowCount = 1;
+            this.tableLayoutPanel24.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel24.Size = new System.Drawing.Size(276, 88);
+            this.tableLayoutPanel24.TabIndex = 0;
+            // 
+            // panel6
+            // 
+            this.panel6.Controls.Add(this.ObjectColorFromTexture2);
+            this.panel6.Controls.Add(this.ObjectColorSingle2);
+            this.panel6.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel6.Location = new System.Drawing.Point(3, 3);
+            this.panel6.Name = "panel6";
+            this.panel6.Size = new System.Drawing.Size(90, 82);
+            this.panel6.TabIndex = 0;
+            // 
+            // ObjectColorFromTexture2
+            // 
+            this.ObjectColorFromTexture2.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.ObjectColorFromTexture2.AutoSize = true;
+            this.ObjectColorFromTexture2.Location = new System.Drawing.Point(3, 53);
+            this.ObjectColorFromTexture2.Name = "ObjectColorFromTexture2";
+            this.ObjectColorFromTexture2.Size = new System.Drawing.Size(72, 17);
+            this.ObjectColorFromTexture2.TabIndex = 1;
+            this.ObjectColorFromTexture2.Text = "Z tekstury";
+            this.ObjectColorFromTexture2.UseVisualStyleBackColor = true;
+            // 
+            // ObjectColorSingle2
+            // 
+            this.ObjectColorSingle2.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.ObjectColorSingle2.AutoSize = true;
+            this.ObjectColorSingle2.Checked = true;
+            this.ObjectColorSingle2.Location = new System.Drawing.Point(3, 12);
+            this.ObjectColorSingle2.Name = "ObjectColorSingle2";
+            this.ObjectColorSingle2.Size = new System.Drawing.Size(50, 17);
+            this.ObjectColorSingle2.TabIndex = 0;
+            this.ObjectColorSingle2.TabStop = true;
+            this.ObjectColorSingle2.Text = "Stały";
+            this.ObjectColorSingle2.UseVisualStyleBackColor = true;
+            // 
+            // tableLayoutPanel25
+            // 
+            this.tableLayoutPanel25.ColumnCount = 1;
+            this.tableLayoutPanel25.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel25.Controls.Add(this.IoTextureBox2, 0, 1);
+            this.tableLayoutPanel25.Controls.Add(this.IoColorBox2, 0, 0);
+            this.tableLayoutPanel25.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel25.Location = new System.Drawing.Point(99, 3);
+            this.tableLayoutPanel25.Name = "tableLayoutPanel25";
+            this.tableLayoutPanel25.RowCount = 2;
+            this.tableLayoutPanel25.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel25.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel25.Size = new System.Drawing.Size(75, 82);
+            this.tableLayoutPanel25.TabIndex = 1;
+            // 
+            // IoTextureBox2
+            // 
+            this.IoTextureBox2.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.IoTextureBox2.BackColor = System.Drawing.Color.White;
+            this.IoTextureBox2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.IoTextureBox2.Location = new System.Drawing.Point(12, 50);
+            this.IoTextureBox2.Name = "IoTextureBox2";
+            this.IoTextureBox2.Size = new System.Drawing.Size(50, 23);
+            this.IoTextureBox2.TabIndex = 3;
+            this.IoTextureBox2.TabStop = false;
+            // 
+            // IoColorBox2
+            // 
+            this.IoColorBox2.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.IoColorBox2.BackColor = System.Drawing.Color.White;
+            this.IoColorBox2.Location = new System.Drawing.Point(12, 9);
+            this.IoColorBox2.Name = "IoColorBox2";
+            this.IoColorBox2.Size = new System.Drawing.Size(50, 23);
+            this.IoColorBox2.TabIndex = 2;
+            this.IoColorBox2.TabStop = false;
+            // 
+            // tableLayoutPanel26
+            // 
+            this.tableLayoutPanel26.ColumnCount = 1;
+            this.tableLayoutPanel26.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel26.Controls.Add(this.SetObjectTextureButton2, 0, 1);
+            this.tableLayoutPanel26.Controls.Add(this.SetObjectColorButton2, 0, 0);
+            this.tableLayoutPanel26.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel26.Location = new System.Drawing.Point(180, 3);
+            this.tableLayoutPanel26.Name = "tableLayoutPanel26";
+            this.tableLayoutPanel26.RowCount = 2;
+            this.tableLayoutPanel26.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel26.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel26.Size = new System.Drawing.Size(93, 82);
+            this.tableLayoutPanel26.TabIndex = 2;
+            // 
+            // SetObjectTextureButton2
+            // 
+            this.SetObjectTextureButton2.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.SetObjectTextureButton2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.SetObjectTextureButton2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.SetObjectTextureButton2.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.SetObjectTextureButton2.Location = new System.Drawing.Point(9, 50);
+            this.SetObjectTextureButton2.Name = "SetObjectTextureButton2";
+            this.SetObjectTextureButton2.Size = new System.Drawing.Size(75, 23);
+            this.SetObjectTextureButton2.TabIndex = 2;
+            this.SetObjectTextureButton2.TabStop = false;
+            this.SetObjectTextureButton2.Text = "Zmień";
+            this.SetObjectTextureButton2.UseVisualStyleBackColor = false;
+            // 
+            // SetObjectColorButton2
+            // 
+            this.SetObjectColorButton2.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.SetObjectColorButton2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.SetObjectColorButton2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.SetObjectColorButton2.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.SetObjectColorButton2.Location = new System.Drawing.Point(9, 9);
+            this.SetObjectColorButton2.Name = "SetObjectColorButton2";
+            this.SetObjectColorButton2.Size = new System.Drawing.Size(75, 23);
+            this.SetObjectColorButton2.TabIndex = 1;
+            this.SetObjectColorButton2.TabStop = false;
+            this.SetObjectColorButton2.Text = "Zmień";
+            this.SetObjectColorButton2.UseVisualStyleBackColor = false;
             // 
             // PolygonFiller
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(48)))));
-            this.ClientSize = new System.Drawing.Size(1184, 812);
+            this.ClientSize = new System.Drawing.Size(1184, 961);
             this.Controls.Add(this.tableLayoutPanel1);
             this.ForeColor = System.Drawing.SystemColors.ControlText;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.MinimumSize = new System.Drawing.Size(1200, 850);
+            this.MinimumSize = new System.Drawing.Size(1200, 1000);
             this.Name = "PolygonFiller";
             this.Text = "Polygon Filler";
             this.tableLayoutPanel1.ResumeLayout(false);
@@ -1082,6 +1243,14 @@
             this.tableLayoutPanel9.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.NormalVectorTextureBox)).EndInit();
             this.tableLayoutPanel10.ResumeLayout(false);
+            this.groupBox8.ResumeLayout(false);
+            this.tableLayoutPanel24.ResumeLayout(false);
+            this.panel6.ResumeLayout(false);
+            this.panel6.PerformLayout();
+            this.tableLayoutPanel25.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.IoTextureBox2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.IoColorBox2)).EndInit();
+            this.tableLayoutPanel26.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -1157,6 +1326,17 @@
         private System.Windows.Forms.TextBox HighlightsHeightTextBox;
         private System.Windows.Forms.Button RadiusButtonAccept;
         private System.Windows.Forms.Button RgbHeadlightsParameterAccept;
+        private System.Windows.Forms.GroupBox groupBox8;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel24;
+        private System.Windows.Forms.Panel panel6;
+        private System.Windows.Forms.RadioButton ObjectColorFromTexture2;
+        private System.Windows.Forms.RadioButton ObjectColorSingle2;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel25;
+        private System.Windows.Forms.PictureBox IoTextureBox2;
+        private System.Windows.Forms.PictureBox IoColorBox2;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel26;
+        private System.Windows.Forms.Button SetObjectTextureButton2;
+        private System.Windows.Forms.Button SetObjectColorButton2;
     }
 }
 
