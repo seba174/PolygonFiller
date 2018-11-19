@@ -144,7 +144,7 @@ namespace PolygonFiller
 
         public void DisableRgbHeadlights()
         {
-            this.rgbHeadlights = null;
+            rgbHeadlights = null;
             RGBHeadlightsEnabled = false;
         }
 
@@ -164,12 +164,8 @@ namespace PolygonFiller
                     int rx = x < 0 ? 0 : x;
                     int ry = y < 0 ? 0 : y;
 
-                    float r = LightColor.X;
-                    float g = LightColor.Y;
-                    float b = LightColor.Z;
-                    float headLightR = 0;
-                    float headLightG = 0;
-                    float headLightB = 0;
+                    float r = LightColor.X, g = LightColor.Y, b = LightColor.Z;
+                    float headLightR = 0, headLightG = 0, headLightB = 0;
 
                     if (rgbHeadlights != null && RGBHeadlightsEnabled)
                     {
@@ -221,10 +217,8 @@ namespace PolygonFiller
 
                     N = Vector3.Normalize(N);
 
-                    float cos;
-                    float cosR;
-                    float cosG;
-                    float cosB;
+                    float cos, cosR, cosG, cosB;
+                    Vector3 cosHeadlights = new Vector3();
                     if (VectorToLightOption == VectorToLightOption.Constant)
                     {
                         cos = N.X * ConstantVectorToLight.X + N.Y * ConstantVectorToLight.Y + N.Z * ConstantVectorToLight.Z;
@@ -235,12 +229,15 @@ namespace PolygonFiller
                         cos = N.X * vectorToLight.X + N.Y * vectorToLight.Y + N.Z * vectorToLight.Z;
                     }
                     Vector3 vecToHeadlight = Vector3.Normalize(new Vector3(RBGHeadlights.rPos.X - x, -RBGHeadlights.rPos.Y - y, RBGHeadlights.rPos.Z));
+                    cosHeadlights.X = N.X * vecToHeadlight.X + N.Y * vecToHeadlight.Y + N.Z * vecToHeadlight.Z;
                     cosR = N.X * vecToHeadlight.X + N.Y * vecToHeadlight.Y + N.Z * vecToHeadlight.Z;
                     cosR = cosR < 0 ? 0 : cosR;
                     vecToHeadlight = Vector3.Normalize(new Vector3(RBGHeadlights.gPos.X - x, RBGHeadlights.gPos.Y - y, RBGHeadlights.gPos.Z));
+                    cosHeadlights.Y = N.X * vecToHeadlight.X + N.Y * vecToHeadlight.Y + N.Z * vecToHeadlight.Z;
                     cosG = N.X * vecToHeadlight.X + N.Y * vecToHeadlight.Y + N.Z * vecToHeadlight.Z;
                     cosG = cosG < 0 ? 0 : cosG;
                     vecToHeadlight = Vector3.Normalize(new Vector3(RBGHeadlights.bPos.X - x, RBGHeadlights.bPos.Y - y, RBGHeadlights.bPos.Z));
+                    cosHeadlights.Z = N.X * vecToHeadlight.X + N.Y * vecToHeadlight.Y + N.Z * vecToHeadlight.Z;
                     cosB = N.X * vecToHeadlight.X + N.Y * vecToHeadlight.Y + N.Z * vecToHeadlight.Z;
                     cosB = cosB < 0 ? 0 : cosB;
 

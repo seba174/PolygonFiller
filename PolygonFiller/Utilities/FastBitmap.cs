@@ -40,30 +40,6 @@ namespace PolygonFiller
             }
         }
 
-        public void SetPixel(int x, int y, Color color)
-        {
-            byte* currentLine = scan0 + (y * bitmapData.Stride);
-            x *= BytesPerPixel;
-
-            switch (Depth)
-            {
-                case 32:
-                    currentLine[x + 3] = color.A;
-                    currentLine[x + 2] = color.R;
-                    currentLine[x + 1] = color.G;
-                    currentLine[x] = color.B;
-                    break;
-                case 24:
-                    currentLine[x + 2] = color.R;
-                    currentLine[x + 1] = color.G;
-                    currentLine[x] = color.B;
-                    break;
-                default:
-                    currentLine[x] = color.R;
-                    break;
-            }
-        }
-
         public void Lock()
         {
             if (Locked)
@@ -72,7 +48,7 @@ namespace PolygonFiller
             }
 
             var rect = new Rectangle(0, 0, Bitmap.Width, Bitmap.Height);
-            bitmapData = Bitmap.LockBits(rect, ImageLockMode.ReadWrite, Bitmap.PixelFormat);
+            bitmapData = Bitmap.LockBits(rect, ImageLockMode.ReadOnly, Bitmap.PixelFormat);
             scan0 = (byte*)bitmapData.Scan0;
 
             Depth = Image.GetPixelFormatSize(Bitmap.PixelFormat);

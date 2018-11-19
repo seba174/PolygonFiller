@@ -74,6 +74,7 @@
     <Compile Include="Polygon\PolygonFill.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Utilities\DirectBitmap.cs" />
+    <Compile Include="Utilities\ExtensionsMethods.cs" />
     <Compile Include="Utilities\FastBitmap.cs" />
     <Compile Include="Utilities\PointOnSphereGenerator.cs" />
     <Compile Include="Utilities\PointUtilities.cs" />

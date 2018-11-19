@@ -21,8 +21,10 @@ namespace PolygonFiller
         private PolygonDrawer selectedElementDrawer;
         private List<IPolygon> polygons;
         private ColorsForPolygonFill colorsForPolygonFill;
+        private ColorsForPolygonFill colorsForPolygonFill2;
         private LightSourceGenerator lightSourceGenerator;
         private RBGHeadlights rgbHeadlights;
+        private RBGHeadlights rgbHeadlights2;
 
         public PolygonFiller()
         {
@@ -47,7 +49,7 @@ namespace PolygonFiller
             standardPolygonDrawer = new PolygonDrawer
             {
                 EdgeColor = Color.Green,
-                EdgeThickness = 3,
+                EdgeThickness = 2,
                 VerticeBorderColor = Color.LightGray,
                 VerticeInsideColor = Color.FromArgb(28, 28, 28),
                 VerticeBorderThickness = 1,
@@ -74,6 +76,12 @@ namespace PolygonFiller
                 HeadlightsHeight = 100
             };
 
+            rgbHeadlights2 = new RBGHeadlights
+            {
+                CosinePower = rgbHeadlights.CosinePower,
+                HeadlightsHeight = rgbHeadlights.HeadlightsHeight
+            };
+
             colorsForPolygonFill = new ColorsForPolygonFill
             {
                 ObjectColorOption = ObjectColorOption.Constant,
@@ -86,16 +94,33 @@ namespace PolygonFiller
                 RBGHeadlights = rgbHeadlights
             };
 
+            colorsForPolygonFill2 = new ColorsForPolygonFill
+            {
+                ObjectColorOption = colorsForPolygonFill.ObjectColorOption,
+                DisruptionVectorOption = colorsForPolygonFill.DisruptionVectorOption,
+                NormalVectorOption = colorsForPolygonFill.NormalVectorOption,
+                VectorToLightOption = colorsForPolygonFill.VectorToLightOption,
+                ObjectColor = colorsForPolygonFill.ObjectColor,
+                LightColor = colorsForPolygonFill.LightColor,
+                DrawingAreaSize = colorsForPolygonFill.DrawingAreaSize,
+                RBGHeadlights = rgbHeadlights2
+            };
+
             DisruptionVectorTextureBox.BackgroundImage = Images.brick_heightmap;
             colorsForPolygonFill.SetHeightMap(Images.brick_heightmap);
+            colorsForPolygonFill2.SetHeightMap(Images.brick_heightmap);
 
             NormalVectorTextureBox.BackgroundImage = Images.brick_normalmap;
             colorsForPolygonFill.SetNormalMap(Images.brick_normalmap);
+            colorsForPolygonFill2.SetNormalMap(Images.brick_normalmap);
 
             IoTextureBox.BackgroundImage = Images.sampleTexture;
             colorsForPolygonFill.SetObjectTexture(Images.sampleTexture);
 
-            colorsForPolygonFill.UpdateCache();
+            IoTextureBox2.BackgroundImage = Images.sampleTexture;
+            colorsForPolygonFill2.SetObjectTexture(Images.sampleTexture);
+
+            UpdatePolygonsCache();
 
             lightSourceGenerator = new LightSourceGenerator
             {
@@ -123,12 +148,16 @@ namespace PolygonFiller
 
             LightColorButton.Click += ChangeLightColor;
             SetObjectColorButton.Click += ChangeObjectColor;
+            SetObjectColorButton2.Click += ChangeObjectColor2;
             SetObjectTextureButton.Click += ChangeObjectTexture;
+            SetObjectTextureButton2.Click += ChangeObjectTexture2;
             SetNormalMapButton.Click += ChangeNormalMap;
             SetHeightMapButton.Click += ChangeHeightMap;
 
             ObjectColorFromTexture.Click += SetObjectColorFromTexture;
+            ObjectColorFromTexture2.Click += SetObjectColorFromTexture2;
             ObjectColorSingle.Click += SetConstantObjectColor;
+            ObjectColorSingle2.Click += SetConstatntObjectColor2;
             NormalVectorConstant.Click += SetNormalVectorConstant;
             NormalVectorFromTexture.Click += SetNormalVectorFromTexture;
             DisruptionVectorConstant.Click += SetDisruptionVectorConstant;
@@ -161,31 +190,33 @@ namespace PolygonFiller
         {
             lightSourceGenerator.Origin = new Vector2(drawingArea.Width / 2, drawingArea.Height / 2);
             colorsForPolygonFill.DrawingAreaSize = drawingArea.Size;
+            colorsForPolygonFill2.DrawingAreaSize = drawingArea.Size;
             if (colorsForPolygonFill.RGBHeadlightsEnabled)
             {
-                colorsForPolygonFill.EnableRgbHeadlights();
+                UpdateRgbHeadlights();
             }
 
-            colorsForPolygonFill.UpdateCache();
+            UpdatePolygonsCache();
             drawingArea.Refresh();
         }
 
         private void TurnRgbHighlightsOffHandler(object sender, EventArgs e)
         {
             colorsForPolygonFill.DisableRgbHeadlights();
-            colorsForPolygonFill.UpdateCache();
+            colorsForPolygonFill2.DisableRgbHeadlights();
+            UpdatePolygonsCache();
             drawingArea.Refresh();
         }
 
         private void TurnRgbHighlightsOnHandler(object sender, EventArgs e)
         {
-            if (colorsForPolygonFill.RGBHeadlightsEnabled)
+            if (colorsForPolygonFill.RGBHeadlightsEnabled || colorsForPolygonFill2.RGBHeadlightsEnabled)
             {
                 return;
             }
 
-            colorsForPolygonFill.EnableRgbHeadlights();
-            colorsForPolygonFill.UpdateCache();
+            UpdateRgbHeadlights();
+            UpdatePolygonsCache();
             drawingArea.Refresh();
         }
 
@@ -212,16 +243,19 @@ namespace PolygonFiller
                 CosinePowerTextBox.Text = rgbCosinePower.ToString();
             }
         }
+
         private void SetNewRgbHeadlightsParameters(object sender, EventArgs e)
         {
             if (rgbHeadlights.HeadlightsHeight != rgbHeight || rgbHeadlights.CosinePower != rgbCosinePower)
             {
                 rgbHeadlights.HeadlightsHeight = rgbHeight;
                 rgbHeadlights.CosinePower = rgbCosinePower;
+                rgbHeadlights2.HeadlightsHeight = rgbHeight;
+                rgbHeadlights2.CosinePower = rgbCosinePower;
                 if (colorsForPolygonFill.RGBHeadlightsEnabled)
                 {
-                    colorsForPolygonFill.EnableRgbHeadlights();
-                    colorsForPolygonFill.UpdateCache();
+                    UpdateRgbHeadlights();
+                    UpdatePolygonsCache();
                     drawingArea.Refresh();
                 }
             }
@@ -256,11 +290,13 @@ namespace PolygonFiller
 
             lightSourceGenerator.Reset();
             colorsForPolygonFill.VectorToLightOption = VectorToLightOption.Variable;
+            colorsForPolygonFill2.VectorToLightOption = VectorToLightOption.Variable;
 
             while (true)
             {
                 colorsForPolygonFill.LightSourcePosition = lightSourceGenerator.GetNextLightSourcePosition();
-                colorsForPolygonFill.UpdateCache();
+                colorsForPolygonFill2.LightSourcePosition = colorsForPolygonFill.LightSourcePosition;
+                UpdatePolygonsCache();
                 drawingArea.Refresh();
 
                 await Task.Delay(700);
@@ -272,13 +308,13 @@ namespace PolygonFiller
             }
         }
 
-
         private void SetVectorToLightConstant(object sender, EventArgs e)
         {
             if (colorsForPolygonFill.VectorToLightOption != VectorToLightOption.Constant)
             {
                 colorsForPolygonFill.VectorToLightOption = VectorToLightOption.Constant;
-                colorsForPolygonFill.UpdateCache();
+                colorsForPolygonFill2.VectorToLightOption = VectorToLightOption.Constant;
+                UpdatePolygonsCache();
                 drawingArea.Refresh();
             }
         }
@@ -288,7 +324,8 @@ namespace PolygonFiller
             if (colorsForPolygonFill.DisruptionVectorOption != DisruptionVectorOption.FromHeightMap)
             {
                 colorsForPolygonFill.DisruptionVectorOption = DisruptionVectorOption.FromHeightMap;
-                colorsForPolygonFill.UpdateCache();
+                colorsForPolygonFill2.DisruptionVectorOption = DisruptionVectorOption.FromHeightMap;
+                UpdatePolygonsCache();
                 drawingArea.Refresh();
             }
         }
@@ -298,7 +335,8 @@ namespace PolygonFiller
             if (colorsForPolygonFill.DisruptionVectorOption != DisruptionVectorOption.None)
             {
                 colorsForPolygonFill.DisruptionVectorOption = DisruptionVectorOption.None;
-                colorsForPolygonFill.UpdateCache();
+                colorsForPolygonFill2.DisruptionVectorOption = DisruptionVectorOption.None;
+                UpdatePolygonsCache();
                 drawingArea.Refresh();
             }
         }
@@ -308,7 +346,8 @@ namespace PolygonFiller
             if (colorsForPolygonFill.NormalVectorOption != NormalVectorOption.FromNormalMap)
             {
                 colorsForPolygonFill.NormalVectorOption = NormalVectorOption.FromNormalMap;
-                colorsForPolygonFill.UpdateCache();
+                colorsForPolygonFill2.NormalVectorOption = NormalVectorOption.FromNormalMap;
+                UpdatePolygonsCache();
                 drawingArea.Refresh();
             }
         }
@@ -318,28 +357,49 @@ namespace PolygonFiller
             if (colorsForPolygonFill.NormalVectorOption != NormalVectorOption.Constant)
             {
                 colorsForPolygonFill.NormalVectorOption = NormalVectorOption.Constant;
-                colorsForPolygonFill.UpdateCache();
+                colorsForPolygonFill2.NormalVectorOption = NormalVectorOption.Constant;
+                UpdatePolygonsCache();
                 drawingArea.Refresh();
             }
         }
 
         private void SetConstantObjectColor(object sender, EventArgs e)
         {
-            if (colorsForPolygonFill.ObjectColorOption != ObjectColorOption.Constant)
+            SetConstantObjectColor(colorsForPolygonFill);
+        }
+
+        private void SetConstatntObjectColor2(object sender, EventArgs e)
+        {
+            SetConstantObjectColor(colorsForPolygonFill2);
+        }
+
+        private void SetConstantObjectColor(ColorsForPolygonFill colForPolyFill)
+        {
+            if (colForPolyFill.ObjectColorOption != ObjectColorOption.Constant)
             {
-                colorsForPolygonFill.ObjectColor = IoColorBox.BackColor;
-                colorsForPolygonFill.ObjectColorOption = ObjectColorOption.Constant;
-                colorsForPolygonFill.UpdateCache();
+                colForPolyFill.ObjectColor = IoColorBox.BackColor;
+                colForPolyFill.ObjectColorOption = ObjectColorOption.Constant;
+                colForPolyFill.UpdateCache();
                 drawingArea.Refresh();
             }
         }
 
         private void SetObjectColorFromTexture(object sender, EventArgs e)
         {
-            if (colorsForPolygonFill.ObjectColorOption != ObjectColorOption.FromTexture)
+            SetObjectColorFromTexture(colorsForPolygonFill);
+        }
+
+        private void SetObjectColorFromTexture2(object sender, EventArgs e)
+        {
+            SetObjectColorFromTexture(colorsForPolygonFill2);
+        }
+
+        private void SetObjectColorFromTexture(ColorsForPolygonFill colForPolyFill)
+        {
+            if (colForPolyFill.ObjectColorOption != ObjectColorOption.FromTexture)
             {
-                colorsForPolygonFill.ObjectColorOption = ObjectColorOption.FromTexture;
-                colorsForPolygonFill.UpdateCache();
+                colForPolyFill.ObjectColorOption = ObjectColorOption.FromTexture;
+                colForPolyFill.UpdateCache();
                 drawingArea.Refresh();
             }
         }
@@ -352,6 +412,7 @@ namespace PolygonFiller
                 Bitmap bitmap = new Bitmap(TextureFileDialog.FileName);
                 DisruptionVectorTextureBox.BackgroundImage = Image.FromFile(TextureFileDialog.FileName);
                 colorsForPolygonFill.SetHeightMap(bitmap);
+                colorsForPolygonFill2.SetHeightMap(bitmap);
                 oldImage?.Dispose();
                 drawingArea.Refresh();
             }
@@ -365,6 +426,7 @@ namespace PolygonFiller
                 Bitmap bitmap = new Bitmap(TextureFileDialog.FileName);
                 NormalVectorTextureBox.BackgroundImage = bitmap;
                 colorsForPolygonFill.SetNormalMap(bitmap);
+                colorsForPolygonFill2.SetNormalMap(bitmap);
                 oldImage?.Dispose();
                 drawingArea.Refresh();
             }
@@ -378,6 +440,19 @@ namespace PolygonFiller
                 Bitmap bitmap = new Bitmap(TextureFileDialog.FileName);
                 IoTextureBox.BackgroundImage = bitmap;
                 colorsForPolygonFill.SetObjectTexture(bitmap);
+                oldImage?.Dispose();
+                drawingArea.Refresh();
+            }
+        }
+
+        private void ChangeObjectTexture2(object sender, EventArgs e)
+        {
+            if (TextureFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                Bitmap oldImage = IoTextureBox2.BackgroundImage as Bitmap;
+                Bitmap bitmap = new Bitmap(TextureFileDialog.FileName);
+                IoTextureBox2.BackgroundImage = bitmap;
+                colorsForPolygonFill2.SetObjectTexture(bitmap);
                 oldImage?.Dispose();
                 drawingArea.Refresh();
             }
@@ -398,13 +473,29 @@ namespace PolygonFiller
             }
         }
 
+        private void ChangeObjectColor2(object sender, EventArgs e)
+        {
+            if (ColorDialog.ShowDialog() == DialogResult.OK)
+            {
+                IoColorBox2.BackColor = ColorDialog.Color;
+                colorsForPolygonFill2.ObjectColor = ColorDialog.Color;
+                if (colorsForPolygonFill2.ObjectColorOption == ObjectColorOption.Constant)
+                {
+                    colorsForPolygonFill2.UpdateCache();
+                }
+
+                drawingArea.Refresh();
+            }
+        }
+
         private void ChangeLightColor(object sender, EventArgs e)
         {
             if (ColorDialog.ShowDialog() == DialogResult.OK)
             {
                 ILColorBox.BackColor = ColorDialog.Color;
                 colorsForPolygonFill.LightColor = new Vector3(ColorDialog.Color.R / 255f, ColorDialog.Color.G / 255f, ColorDialog.Color.B / 255f);
-                colorsForPolygonFill.UpdateCache();
+                colorsForPolygonFill2.LightColor = colorsForPolygonFill.LightColor;
+                UpdatePolygonsCache();
                 drawingArea.Refresh();
             }
         }
@@ -424,7 +515,14 @@ namespace PolygonFiller
             ConcurrentDictionary<IPolygon, DirectBitmap> directBitmaps = new ConcurrentDictionary<IPolygon, DirectBitmap>(Environment.ProcessorCount, polygons.Count);
             Parallel.ForEach(polygons, polygon =>
             {
-                directBitmaps.TryAdd(polygon, PolygonFill.GetPolygonFillDirectBitmap(polygon, colorsForPolygonFill));
+                if (polygons[0] == polygon)
+                {
+                    directBitmaps.TryAdd(polygon, PolygonFill.GetPolygonFillDirectBitmap(polygon, colorsForPolygonFill));
+                }
+                else
+                {
+                    directBitmaps.TryAdd(polygon, PolygonFill.GetPolygonFillDirectBitmap(polygon, colorsForPolygonFill2));
+                }
             });
 
             for (int i = polygons.Count - 1; i >= 0; i--)
@@ -451,6 +549,22 @@ namespace PolygonFiller
                 Polygon polygonWithOnlySelectedVertice = new Polygon(new Vertice[] { selectedVertice }, new Edge[0]);
                 selectedElementDrawer.DrawPolygon(e.Graphics, polygonWithOnlySelectedVertice);
             }
+        }
+
+        private void UpdatePolygonsCache()
+        {
+            var t1 = Task.Run(() => colorsForPolygonFill.UpdateCache());
+            var t2 = Task.Run(() => colorsForPolygonFill2.UpdateCache());
+            t1.Wait();
+            t2.Wait();
+        }
+
+        private void UpdateRgbHeadlights()
+        {
+            var t1 = Task.Run(() => colorsForPolygonFill.EnableRgbHeadlights());
+            var t2 = Task.Run(() => colorsForPolygonFill2.EnableRgbHeadlights());
+            t1.Wait();
+            t2.Wait();
         }
     }
 }
