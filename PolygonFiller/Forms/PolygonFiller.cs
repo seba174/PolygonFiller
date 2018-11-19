@@ -11,17 +11,24 @@ namespace PolygonFiller
 {
     public partial class PolygonFiller : Form
     {
+        private int radius;
+        private int rgbHeight;
+        private int rgbCosinePower;
+
+        private FormWindowState lastState;
         private DrawingAreaInputHandler inputHandler;
         private PolygonDrawer standardPolygonDrawer;
         private PolygonDrawer selectedElementDrawer;
         private List<IPolygon> polygons;
         private ColorsForPolygonFill colorsForPolygonFill;
         private LightSourceGenerator lightSourceGenerator;
+        private RBGHeadlights rgbHeadlights;
 
         public PolygonFiller()
         {
             InitializeComponent();
             StartPosition = FormStartPosition.CenterScreen;
+            lastState = WindowState;
 
             polygons = new List<IPolygon> { PolygonCreator.GetTriangle(), PolygonCreator.GetTriangle() };
             polygons[1].HandlePolygonMove(new Point(350, 0));
@@ -61,6 +68,12 @@ namespace PolygonFiller
             ColorsForPolygonFill.ConstantNormalVector = new Vector3(0, 0, 1);
             ColorsForPolygonFill.ConstantVectorToLight = new Vector3(0, 0, 1);
 
+            rgbHeadlights = new RBGHeadlights
+            {
+                CosinePower = 1000,
+                HeadlightsHeight = 100
+            };
+
             colorsForPolygonFill = new ColorsForPolygonFill
             {
                 ObjectColorOption = ObjectColorOption.Constant,
@@ -68,8 +81,21 @@ namespace PolygonFiller
                 NormalVectorOption = NormalVectorOption.Constant,
                 VectorToLightOption = VectorToLightOption.Constant,
                 ObjectColor = ILColorBox.BackColor,
-                LightColor = new Vector3(1, 1, 1)
+                LightColor = new Vector3(1, 1, 1),
+                DrawingAreaSize = drawingArea.Size,
+                RBGHeadlights = rgbHeadlights
             };
+
+            DisruptionVectorTextureBox.BackgroundImage = Images.brick_heightmap;
+            colorsForPolygonFill.SetHeightMap(Images.brick_heightmap);
+
+            NormalVectorTextureBox.BackgroundImage = Images.brick_normalmap;
+            colorsForPolygonFill.SetNormalMap(Images.brick_normalmap);
+
+            IoTextureBox.BackgroundImage = Images.sampleTexture;
+            colorsForPolygonFill.SetObjectTexture(Images.sampleTexture);
+
+            colorsForPolygonFill.UpdateCache();
 
             lightSourceGenerator = new LightSourceGenerator
             {
@@ -82,8 +108,14 @@ namespace PolygonFiller
                 StartingHeight = 100
             };
 
+            radius = lightSourceGenerator.Radius;
+            rgbCosinePower = rgbHeadlights.CosinePower;
+            rgbHeight = rgbHeadlights.HeadlightsHeight;
+
+            ResizeEnd += FormSizeChangedHandler;
+            Resize += HandleWindowMaximization;
+
             drawingArea.Paint += Draw;
-            drawingArea.SizeChanged += UpdateLightSourceGenerator;
 
             drawingArea.MouseDown += inputHandler.HandleMouseDown;
             drawingArea.MouseUp += inputHandler.HandleMouseUp;
@@ -103,26 +135,111 @@ namespace PolygonFiller
             DisruptionVectorFromTexture.Click += SetDisruptionVectorFromTexture;
             VectorToLightConstant.Click += SetVectorToLightConstant;
             VectorToLightAnimated.CheckedChanged += SetVectorToLightAnimated;
+            TurnRgbHighlightsOn.Click += TurnRgbHighlightsOnHandler;
+            TurnRgbHighlightsOff.Click += TurnRgbHighlightsOffHandler;
 
             RadiusTextBox.Text = lightSourceGenerator.Radius.ToString();
             RadiusTextBox.TextChanged += RadiusTextboxTextChangedHandler;
+            RadiusButtonAccept.Click += SetNewRadius;
+            CosinePowerTextBox.Text = rgbHeadlights.CosinePower.ToString();
+            CosinePowerTextBox.TextChanged += CosineTextboxTextChangedHandler;
+            HighlightsHeightTextBox.Text = rgbHeadlights.HeadlightsHeight.ToString();
+            HighlightsHeightTextBox.TextChanged += HighlightsHeightTextboxTextChangedHandler;
+            RgbHeadlightsParameterAccept.Click += SetNewRgbHeadlightsParameters;
+        }
+
+        private void HandleWindowMaximization(object sender, EventArgs e)
+        {
+            if (lastState != WindowState && (WindowState == FormWindowState.Maximized || WindowState == FormWindowState.Normal))
+            {
+                lastState = WindowState;
+                FormSizeChangedHandler(sender, e);
+            }
+        }
+
+        private void FormSizeChangedHandler(object sender, EventArgs e)
+        {
+            lightSourceGenerator.Origin = new Vector2(drawingArea.Width / 2, drawingArea.Height / 2);
+            colorsForPolygonFill.DrawingAreaSize = drawingArea.Size;
+            if (colorsForPolygonFill.RGBHeadlightsEnabled)
+                colorsForPolygonFill.EnableRgbHeadlights();
+            colorsForPolygonFill.UpdateCache();
+            drawingArea.Refresh();
+        }
+
+        private void TurnRgbHighlightsOffHandler(object sender, EventArgs e)
+        {
+            colorsForPolygonFill.DisableRgbHeadlights();
+            colorsForPolygonFill.UpdateCache();
+            drawingArea.Refresh();
+        }
+
+        private void TurnRgbHighlightsOnHandler(object sender, EventArgs e)
+        {
+            if (colorsForPolygonFill.RGBHeadlightsEnabled)
+                return;
+
+            colorsForPolygonFill.EnableRgbHeadlights();
+            colorsForPolygonFill.UpdateCache();
+            drawingArea.Refresh();
+        }
+
+        private void HighlightsHeightTextboxTextChangedHandler(object sender, EventArgs e)
+        {
+            if (uint.TryParse(HighlightsHeightTextBox.Text, out uint result) && result < int.MaxValue)
+            {
+                rgbHeight = (int)result;
+            }
+            else
+            {
+                HighlightsHeightTextBox.Text = rgbHeight.ToString();
+            }
+        }
+
+        private void CosineTextboxTextChangedHandler(object sender, EventArgs e)
+        {
+            if (uint.TryParse(CosinePowerTextBox.Text, out uint result) && result < int.MaxValue)
+            {
+                rgbCosinePower = (int)result;
+            }
+            else
+            {
+                CosinePowerTextBox.Text = rgbCosinePower.ToString();
+            }
+        }
+        private void SetNewRgbHeadlightsParameters(object sender, EventArgs e)
+        {
+            if (rgbHeadlights.HeadlightsHeight != rgbHeight || rgbHeadlights.CosinePower != rgbCosinePower)
+            {
+                rgbHeadlights.HeadlightsHeight = rgbHeight;
+                rgbHeadlights.CosinePower = rgbCosinePower;
+                if (colorsForPolygonFill.RGBHeadlightsEnabled)
+                {
+                    colorsForPolygonFill.EnableRgbHeadlights();
+                    colorsForPolygonFill.UpdateCache();
+                    drawingArea.Refresh();
+                }
+            }
         }
 
         private void RadiusTextboxTextChangedHandler(object sender, EventArgs e)
         {
             if (uint.TryParse(RadiusTextBox.Text, out uint result) && result < int.MaxValue)
             {
-                lightSourceGenerator.Radius = (int)result;
+                radius = (int)result;
             }
             else
             {
-                RadiusTextBox.Text = lightSourceGenerator.Radius.ToString();
+                RadiusTextBox.Text = radius.ToString();
             }
         }
 
-        private void UpdateLightSourceGenerator(object sender, EventArgs e)
+        private void SetNewRadius(object sender, EventArgs e)
         {
-            lightSourceGenerator.Origin = new Vector2(drawingArea.Width / 2, drawingArea.Height / 2);
+            if (lightSourceGenerator.Radius != radius)
+            {
+                lightSourceGenerator.Radius = radius;
+            }
         }
 
         private async void SetVectorToLightAnimated(object sender, EventArgs e)
@@ -138,9 +255,10 @@ namespace PolygonFiller
             while (true)
             {
                 colorsForPolygonFill.LightSourcePosition = lightSourceGenerator.GetNextLightSourcePosition();
+                colorsForPolygonFill.UpdateCache();
                 drawingArea.Refresh();
 
-                await Task.Delay(600);
+                await Task.Delay(700);
 
                 if (colorsForPolygonFill.VectorToLightOption == VectorToLightOption.Constant)
                 {
@@ -149,47 +267,76 @@ namespace PolygonFiller
             }
         }
 
+
         private void SetVectorToLightConstant(object sender, EventArgs e)
         {
-            colorsForPolygonFill.VectorToLightOption = VectorToLightOption.Constant;
-            drawingArea.Refresh();
+            if (colorsForPolygonFill.VectorToLightOption != VectorToLightOption.Constant)
+            {
+                colorsForPolygonFill.VectorToLightOption = VectorToLightOption.Constant;
+                colorsForPolygonFill.UpdateCache();
+                drawingArea.Refresh();
+            }
         }
 
         private void SetDisruptionVectorFromTexture(object sender, EventArgs e)
         {
-            colorsForPolygonFill.DisruptionVectorOption = DisruptionVectorOption.FromHeightMap;
-            drawingArea.Refresh();
+            if (colorsForPolygonFill.DisruptionVectorOption != DisruptionVectorOption.FromHeightMap)
+            {
+                colorsForPolygonFill.DisruptionVectorOption = DisruptionVectorOption.FromHeightMap;
+                colorsForPolygonFill.UpdateCache();
+                drawingArea.Refresh();
+            }
         }
 
         private void SetDisruptionVectorConstant(object sender, EventArgs e)
         {
-            colorsForPolygonFill.DisruptionVectorOption = DisruptionVectorOption.None;
-            drawingArea.Refresh();
+            if (colorsForPolygonFill.DisruptionVectorOption != DisruptionVectorOption.None)
+            {
+                colorsForPolygonFill.DisruptionVectorOption = DisruptionVectorOption.None;
+                colorsForPolygonFill.UpdateCache();
+                drawingArea.Refresh();
+            }
         }
 
         private void SetNormalVectorFromTexture(object sender, EventArgs e)
         {
-            colorsForPolygonFill.NormalVectorOption = NormalVectorOption.FromNormalMap;
-            drawingArea.Refresh();
+            if (colorsForPolygonFill.NormalVectorOption != NormalVectorOption.FromNormalMap)
+            {
+                colorsForPolygonFill.NormalVectorOption = NormalVectorOption.FromNormalMap;
+                colorsForPolygonFill.UpdateCache();
+                drawingArea.Refresh();
+            }
         }
 
         private void SetNormalVectorConstant(object sender, EventArgs e)
         {
-            colorsForPolygonFill.NormalVectorOption = NormalVectorOption.Constant;
-            drawingArea.Refresh();
+            if (colorsForPolygonFill.NormalVectorOption != NormalVectorOption.Constant)
+            {
+                colorsForPolygonFill.NormalVectorOption = NormalVectorOption.Constant;
+                colorsForPolygonFill.UpdateCache();
+                drawingArea.Refresh();
+            }
         }
 
         private void SetConstantObjectColor(object sender, EventArgs e)
         {
-            colorsForPolygonFill.ObjectColor = IoColorBox.BackColor;
-            colorsForPolygonFill.ObjectColorOption = ObjectColorOption.Constant;
-            drawingArea.Refresh();
+            if (colorsForPolygonFill.ObjectColorOption != ObjectColorOption.Constant)
+            {
+                colorsForPolygonFill.ObjectColor = IoColorBox.BackColor;
+                colorsForPolygonFill.ObjectColorOption = ObjectColorOption.Constant;
+                colorsForPolygonFill.UpdateCache();
+                drawingArea.Refresh();
+            }
         }
 
         private void SetObjectColorFromTexture(object sender, EventArgs e)
         {
-            colorsForPolygonFill.ObjectColorOption = ObjectColorOption.FromTexture;
-            drawingArea.Refresh();
+            if (colorsForPolygonFill.ObjectColorOption != ObjectColorOption.FromTexture)
+            {
+                colorsForPolygonFill.ObjectColorOption = ObjectColorOption.FromTexture;
+                colorsForPolygonFill.UpdateCache();
+                drawingArea.Refresh();
+            }
         }
 
         private void ChangeHeightMap(object sender, EventArgs e)
@@ -237,6 +384,8 @@ namespace PolygonFiller
             {
                 IoColorBox.BackColor = ColorDialog.Color;
                 colorsForPolygonFill.ObjectColor = ColorDialog.Color;
+                if (colorsForPolygonFill.ObjectColorOption == ObjectColorOption.Constant)
+                    colorsForPolygonFill.UpdateCache();
                 drawingArea.Refresh();
             }
         }
@@ -247,6 +396,7 @@ namespace PolygonFiller
             {
                 ILColorBox.BackColor = ColorDialog.Color;
                 colorsForPolygonFill.LightColor = new Vector3(ColorDialog.Color.R / 255f, ColorDialog.Color.G / 255f, ColorDialog.Color.B / 255f);
+                colorsForPolygonFill.UpdateCache();
                 drawingArea.Refresh();
             }
         }
