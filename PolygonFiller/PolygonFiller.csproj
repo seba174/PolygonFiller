@@ -74,12 +74,16 @@
     <Compile Include="Polygon\PolygonFill.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Utilities\DirectBitmap.cs" />
+    <Compile Include="Utilities\EdgeDetails.cs" />
     <Compile Include="Utilities\ExtensionsMethods.cs" />
     <Compile Include="Utilities\FastBitmap.cs" />
+    <Compile Include="Utilities\NormalVectorCustomGenerator.cs" />
     <Compile Include="Utilities\PointOnSphereGenerator.cs" />
     <Compile Include="Utilities\PointUtilities.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Polygon\Vertice.cs" />
+    <Compile Include="Utilities\RGBHeadlights.cs" />
+    <Compile Include="Utilities\TimeTicker.cs" />
     <EmbeddedResource Include="Forms\PolygonFiller.resx">
       <DependentUpon>PolygonFiller.cs</DependentUpon>
     </EmbeddedResource>
