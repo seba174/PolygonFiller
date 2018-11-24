@@ -32,6 +32,17 @@
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.drawingArea = new System.Windows.Forms.PictureBox();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            this.groupBox8 = new System.Windows.Forms.GroupBox();
+            this.tableLayoutPanel24 = new System.Windows.Forms.TableLayoutPanel();
+            this.panel6 = new System.Windows.Forms.Panel();
+            this.ObjectColorFromTexture2 = new System.Windows.Forms.RadioButton();
+            this.ObjectColorSingle2 = new System.Windows.Forms.RadioButton();
+            this.tableLayoutPanel25 = new System.Windows.Forms.TableLayoutPanel();
+            this.IoTextureBox2 = new System.Windows.Forms.PictureBox();
+            this.IoColorBox2 = new System.Windows.Forms.PictureBox();
+            this.tableLayoutPanel26 = new System.Windows.Forms.TableLayoutPanel();
+            this.SetObjectTextureButton2 = new System.Windows.Forms.Button();
+            this.SetObjectColorButton2 = new System.Windows.Forms.Button();
             this.groupBox7 = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanel20 = new System.Windows.Forms.TableLayoutPanel();
             this.panel5 = new System.Windows.Forms.Panel();
@@ -89,29 +100,31 @@
             this.tableLayoutPanel8 = new System.Windows.Forms.TableLayoutPanel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel15 = new System.Windows.Forms.TableLayoutPanel();
+            this.NormalVectorAnimated = new System.Windows.Forms.RadioButton();
             this.NormalVectorFromTexture = new System.Windows.Forms.RadioButton();
             this.NormalVectorConstant = new System.Windows.Forms.RadioButton();
             this.tableLayoutPanel9 = new System.Windows.Forms.TableLayoutPanel();
+            this.label7 = new System.Windows.Forms.Label();
             this.NormalVectorTextureBox = new System.Windows.Forms.PictureBox();
             this.label2 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
             this.tableLayoutPanel10 = new System.Windows.Forms.TableLayoutPanel();
+            this.NormalVectorAnimatedParametersUpdate = new System.Windows.Forms.Button();
             this.SetNormalMapButton = new System.Windows.Forms.Button();
+            this.NormalVectorAnimatedParameterA = new System.Windows.Forms.TextBox();
+            this.NormalVectorAnimatedParameterB = new System.Windows.Forms.TextBox();
             this.ColorDialog = new System.Windows.Forms.ColorDialog();
             this.TextureFileDialog = new System.Windows.Forms.OpenFileDialog();
-            this.groupBox8 = new System.Windows.Forms.GroupBox();
-            this.tableLayoutPanel24 = new System.Windows.Forms.TableLayoutPanel();
-            this.panel6 = new System.Windows.Forms.Panel();
-            this.ObjectColorFromTexture2 = new System.Windows.Forms.RadioButton();
-            this.ObjectColorSingle2 = new System.Windows.Forms.RadioButton();
-            this.tableLayoutPanel25 = new System.Windows.Forms.TableLayoutPanel();
-            this.IoTextureBox2 = new System.Windows.Forms.PictureBox();
-            this.IoColorBox2 = new System.Windows.Forms.PictureBox();
-            this.tableLayoutPanel26 = new System.Windows.Forms.TableLayoutPanel();
-            this.SetObjectTextureButton2 = new System.Windows.Forms.Button();
-            this.SetObjectColorButton2 = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.drawingArea)).BeginInit();
             this.tableLayoutPanel2.SuspendLayout();
+            this.groupBox8.SuspendLayout();
+            this.tableLayoutPanel24.SuspendLayout();
+            this.panel6.SuspendLayout();
+            this.tableLayoutPanel25.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.IoTextureBox2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.IoColorBox2)).BeginInit();
+            this.tableLayoutPanel26.SuspendLayout();
             this.groupBox7.SuspendLayout();
             this.tableLayoutPanel20.SuspendLayout();
             this.panel5.SuspendLayout();
@@ -150,13 +163,6 @@
             this.tableLayoutPanel9.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.NormalVectorTextureBox)).BeginInit();
             this.tableLayoutPanel10.SuspendLayout();
-            this.groupBox8.SuspendLayout();
-            this.tableLayoutPanel24.SuspendLayout();
-            this.panel6.SuspendLayout();
-            this.tableLayoutPanel25.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.IoTextureBox2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.IoColorBox2)).BeginInit();
-            this.tableLayoutPanel26.SuspendLayout();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -175,7 +181,7 @@
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(1184, 961);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(1184, 962);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // drawingArea
@@ -184,7 +190,7 @@
             this.drawingArea.Dock = System.Windows.Forms.DockStyle.Fill;
             this.drawingArea.Location = new System.Drawing.Point(3, 3);
             this.drawingArea.Name = "drawingArea";
-            this.drawingArea.Size = new System.Drawing.Size(884, 955);
+            this.drawingArea.Size = new System.Drawing.Size(884, 956);
             this.drawingArea.TabIndex = 0;
             this.drawingArea.TabStop = false;
             // 
@@ -209,20 +215,161 @@
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 160F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 160F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(288, 955);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(288, 956);
             this.tableLayoutPanel2.TabIndex = 1;
+            // 
+            // groupBox8
+            // 
+            this.groupBox8.Controls.Add(this.tableLayoutPanel24);
+            this.groupBox8.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.groupBox8.Location = new System.Drawing.Point(3, 175);
+            this.groupBox8.Name = "groupBox8";
+            this.groupBox8.Size = new System.Drawing.Size(282, 107);
+            this.groupBox8.TabIndex = 6;
+            this.groupBox8.TabStop = false;
+            this.groupBox8.Text = "Second triangle color";
+            // 
+            // tableLayoutPanel24
+            // 
+            this.tableLayoutPanel24.ColumnCount = 3;
+            this.tableLayoutPanel24.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel24.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 45F));
+            this.tableLayoutPanel24.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 55F));
+            this.tableLayoutPanel24.Controls.Add(this.panel6, 0, 0);
+            this.tableLayoutPanel24.Controls.Add(this.tableLayoutPanel25, 1, 0);
+            this.tableLayoutPanel24.Controls.Add(this.tableLayoutPanel26, 2, 0);
+            this.tableLayoutPanel24.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel24.Location = new System.Drawing.Point(3, 16);
+            this.tableLayoutPanel24.Name = "tableLayoutPanel24";
+            this.tableLayoutPanel24.RowCount = 1;
+            this.tableLayoutPanel24.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel24.Size = new System.Drawing.Size(276, 88);
+            this.tableLayoutPanel24.TabIndex = 0;
+            // 
+            // panel6
+            // 
+            this.panel6.Controls.Add(this.ObjectColorFromTexture2);
+            this.panel6.Controls.Add(this.ObjectColorSingle2);
+            this.panel6.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel6.Location = new System.Drawing.Point(3, 3);
+            this.panel6.Name = "panel6";
+            this.panel6.Size = new System.Drawing.Size(90, 82);
+            this.panel6.TabIndex = 0;
+            // 
+            // ObjectColorFromTexture2
+            // 
+            this.ObjectColorFromTexture2.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.ObjectColorFromTexture2.AutoSize = true;
+            this.ObjectColorFromTexture2.Location = new System.Drawing.Point(3, 53);
+            this.ObjectColorFromTexture2.Name = "ObjectColorFromTexture2";
+            this.ObjectColorFromTexture2.Size = new System.Drawing.Size(83, 17);
+            this.ObjectColorFromTexture2.TabIndex = 1;
+            this.ObjectColorFromTexture2.Text = "From texture";
+            this.ObjectColorFromTexture2.UseVisualStyleBackColor = true;
+            // 
+            // ObjectColorSingle2
+            // 
+            this.ObjectColorSingle2.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.ObjectColorSingle2.AutoSize = true;
+            this.ObjectColorSingle2.Checked = true;
+            this.ObjectColorSingle2.Location = new System.Drawing.Point(3, 12);
+            this.ObjectColorSingle2.Name = "ObjectColorSingle2";
+            this.ObjectColorSingle2.Size = new System.Drawing.Size(67, 17);
+            this.ObjectColorSingle2.TabIndex = 0;
+            this.ObjectColorSingle2.TabStop = true;
+            this.ObjectColorSingle2.Text = "Constant";
+            this.ObjectColorSingle2.UseVisualStyleBackColor = true;
+            // 
+            // tableLayoutPanel25
+            // 
+            this.tableLayoutPanel25.ColumnCount = 1;
+            this.tableLayoutPanel25.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel25.Controls.Add(this.IoTextureBox2, 0, 1);
+            this.tableLayoutPanel25.Controls.Add(this.IoColorBox2, 0, 0);
+            this.tableLayoutPanel25.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel25.Location = new System.Drawing.Point(99, 3);
+            this.tableLayoutPanel25.Name = "tableLayoutPanel25";
+            this.tableLayoutPanel25.RowCount = 2;
+            this.tableLayoutPanel25.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel25.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel25.Size = new System.Drawing.Size(75, 82);
+            this.tableLayoutPanel25.TabIndex = 1;
+            // 
+            // IoTextureBox2
+            // 
+            this.IoTextureBox2.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.IoTextureBox2.BackColor = System.Drawing.Color.White;
+            this.IoTextureBox2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.IoTextureBox2.Location = new System.Drawing.Point(12, 50);
+            this.IoTextureBox2.Name = "IoTextureBox2";
+            this.IoTextureBox2.Size = new System.Drawing.Size(50, 23);
+            this.IoTextureBox2.TabIndex = 3;
+            this.IoTextureBox2.TabStop = false;
+            // 
+            // IoColorBox2
+            // 
+            this.IoColorBox2.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.IoColorBox2.BackColor = System.Drawing.Color.White;
+            this.IoColorBox2.Location = new System.Drawing.Point(12, 9);
+            this.IoColorBox2.Name = "IoColorBox2";
+            this.IoColorBox2.Size = new System.Drawing.Size(50, 23);
+            this.IoColorBox2.TabIndex = 2;
+            this.IoColorBox2.TabStop = false;
+            // 
+            // tableLayoutPanel26
+            // 
+            this.tableLayoutPanel26.ColumnCount = 1;
+            this.tableLayoutPanel26.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel26.Controls.Add(this.SetObjectTextureButton2, 0, 1);
+            this.tableLayoutPanel26.Controls.Add(this.SetObjectColorButton2, 0, 0);
+            this.tableLayoutPanel26.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel26.Location = new System.Drawing.Point(180, 3);
+            this.tableLayoutPanel26.Name = "tableLayoutPanel26";
+            this.tableLayoutPanel26.RowCount = 2;
+            this.tableLayoutPanel26.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel26.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel26.Size = new System.Drawing.Size(93, 82);
+            this.tableLayoutPanel26.TabIndex = 2;
+            // 
+            // SetObjectTextureButton2
+            // 
+            this.SetObjectTextureButton2.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.SetObjectTextureButton2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.SetObjectTextureButton2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.SetObjectTextureButton2.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.SetObjectTextureButton2.Location = new System.Drawing.Point(9, 50);
+            this.SetObjectTextureButton2.Name = "SetObjectTextureButton2";
+            this.SetObjectTextureButton2.Size = new System.Drawing.Size(75, 23);
+            this.SetObjectTextureButton2.TabIndex = 2;
+            this.SetObjectTextureButton2.TabStop = false;
+            this.SetObjectTextureButton2.Text = "Change";
+            this.SetObjectTextureButton2.UseVisualStyleBackColor = false;
+            // 
+            // SetObjectColorButton2
+            // 
+            this.SetObjectColorButton2.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.SetObjectColorButton2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.SetObjectColorButton2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.SetObjectColorButton2.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.SetObjectColorButton2.Location = new System.Drawing.Point(9, 9);
+            this.SetObjectColorButton2.Name = "SetObjectColorButton2";
+            this.SetObjectColorButton2.Size = new System.Drawing.Size(75, 23);
+            this.SetObjectColorButton2.TabIndex = 1;
+            this.SetObjectColorButton2.TabStop = false;
+            this.SetObjectColorButton2.Text = "Change";
+            this.SetObjectColorButton2.UseVisualStyleBackColor = false;
             // 
             // groupBox7
             // 
             this.groupBox7.Controls.Add(this.tableLayoutPanel20);
             this.groupBox7.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox7.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.groupBox7.Location = new System.Drawing.Point(3, 709);
+            this.groupBox7.Location = new System.Drawing.Point(3, 774);
             this.groupBox7.Name = "groupBox7";
             this.groupBox7.Size = new System.Drawing.Size(282, 154);
             this.groupBox7.TabIndex = 5;
             this.groupBox7.TabStop = false;
-            this.groupBox7.Text = "Reflektory RGB";
+            this.groupBox7.Text = "RGB headlights";
             // 
             // tableLayoutPanel20
             // 
@@ -277,7 +424,7 @@
             this.TurnRgbHighlightsOff.Size = new System.Drawing.Size(84, 39);
             this.TurnRgbHighlightsOff.TabIndex = 3;
             this.TurnRgbHighlightsOff.TabStop = true;
-            this.TurnRgbHighlightsOff.Text = "Wyłączone";
+            this.TurnRgbHighlightsOff.Text = "Off";
             this.TurnRgbHighlightsOff.UseVisualStyleBackColor = true;
             // 
             // TurnRgbHighlightsOn
@@ -288,7 +435,7 @@
             this.TurnRgbHighlightsOn.Name = "TurnRgbHighlightsOn";
             this.TurnRgbHighlightsOn.Size = new System.Drawing.Size(84, 38);
             this.TurnRgbHighlightsOn.TabIndex = 2;
-            this.TurnRgbHighlightsOn.Text = "Włączone";
+            this.TurnRgbHighlightsOn.Text = "On";
             this.TurnRgbHighlightsOn.UseVisualStyleBackColor = true;
             // 
             // tableLayoutPanel22
@@ -312,21 +459,21 @@
             this.label5.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(11, 15);
+            this.label5.Location = new System.Drawing.Point(3, 15);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(53, 13);
+            this.label5.Size = new System.Drawing.Size(69, 13);
             this.label5.TabIndex = 4;
-            this.label5.Text = "Potęga = ";
+            this.label5.Text = "CosinePow = ";
             // 
             // label6
             // 
             this.label6.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(4, 60);
+            this.label6.Location = new System.Drawing.Point(14, 60);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(66, 13);
+            this.label6.Size = new System.Drawing.Size(47, 13);
             this.label6.TabIndex = 5;
-            this.label6.Text = "Wysokość =";
+            this.label6.Text = "Height =";
             // 
             // tableLayoutPanel23
             // 
@@ -373,7 +520,7 @@
             this.RgbHeadlightsParameterAccept.Size = new System.Drawing.Size(75, 23);
             this.RgbHeadlightsParameterAccept.TabIndex = 4;
             this.RgbHeadlightsParameterAccept.TabStop = false;
-            this.RgbHeadlightsParameterAccept.Text = "Zaktualizuj";
+            this.RgbHeadlightsParameterAccept.Text = "Update";
             this.RgbHeadlightsParameterAccept.UseVisualStyleBackColor = false;
             // 
             // groupBox6
@@ -381,12 +528,12 @@
             this.groupBox6.Controls.Add(this.tableLayoutPanel16);
             this.groupBox6.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox6.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.groupBox6.Location = new System.Drawing.Point(3, 549);
+            this.groupBox6.Location = new System.Drawing.Point(3, 614);
             this.groupBox6.Name = "groupBox6";
             this.groupBox6.Size = new System.Drawing.Size(282, 154);
             this.groupBox6.TabIndex = 4;
             this.groupBox6.TabStop = false;
-            this.groupBox6.Text = "Wektor do źródła światła";
+            this.groupBox6.Text = "Vector to source light";
             // 
             // tableLayoutPanel16
             // 
@@ -439,7 +586,7 @@
             this.VectorToLightAnimated.Name = "VectorToLightAnimated";
             this.VectorToLightAnimated.Size = new System.Drawing.Size(84, 39);
             this.VectorToLightAnimated.TabIndex = 3;
-            this.VectorToLightAnimated.Text = "Animowany po sferze";
+            this.VectorToLightAnimated.Text = "Animated";
             this.VectorToLightAnimated.UseVisualStyleBackColor = true;
             // 
             // VectorToLightConstant
@@ -452,7 +599,7 @@
             this.VectorToLightConstant.Size = new System.Drawing.Size(84, 38);
             this.VectorToLightConstant.TabIndex = 2;
             this.VectorToLightConstant.TabStop = true;
-            this.VectorToLightConstant.Text = "Stały";
+            this.VectorToLightConstant.Text = "Constant";
             this.VectorToLightConstant.UseVisualStyleBackColor = true;
             // 
             // tableLayoutPanel18
@@ -486,11 +633,11 @@
             // 
             this.label4.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(10, 60);
+            this.label4.Location = new System.Drawing.Point(13, 60);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(54, 13);
+            this.label4.Size = new System.Drawing.Size(49, 13);
             this.label4.TabIndex = 5;
-            this.label4.Text = "Promień =";
+            this.label4.Text = "Radius =";
             // 
             // tableLayoutPanel19
             // 
@@ -526,7 +673,7 @@
             this.RadiusButtonAccept.Size = new System.Drawing.Size(75, 23);
             this.RadiusButtonAccept.TabIndex = 3;
             this.RadiusButtonAccept.TabStop = false;
-            this.RadiusButtonAccept.Text = "Zaktualizuj";
+            this.RadiusButtonAccept.Text = "Update";
             this.RadiusButtonAccept.UseVisualStyleBackColor = false;
             // 
             // groupBox1
@@ -538,7 +685,7 @@
             this.groupBox1.Size = new System.Drawing.Size(282, 53);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Kolor źródła światła IL";
+            this.groupBox1.Text = "Source light color";
             // 
             // tableLayoutPanel3
             // 
@@ -566,7 +713,7 @@
             this.LightColorButton.Size = new System.Drawing.Size(75, 23);
             this.LightColorButton.TabIndex = 0;
             this.LightColorButton.TabStop = false;
-            this.LightColorButton.Text = "Zmień";
+            this.LightColorButton.Text = "Change";
             this.LightColorButton.UseVisualStyleBackColor = false;
             // 
             // ILColorBox
@@ -588,7 +735,7 @@
             this.groupBox2.Size = new System.Drawing.Size(282, 107);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Kolor trójkąta 1 Io";
+            this.groupBox2.Text = "First triangle color";
             // 
             // tableLayoutPanel4
             // 
@@ -623,9 +770,9 @@
             this.ObjectColorFromTexture.AutoSize = true;
             this.ObjectColorFromTexture.Location = new System.Drawing.Point(3, 53);
             this.ObjectColorFromTexture.Name = "ObjectColorFromTexture";
-            this.ObjectColorFromTexture.Size = new System.Drawing.Size(72, 17);
+            this.ObjectColorFromTexture.Size = new System.Drawing.Size(83, 17);
             this.ObjectColorFromTexture.TabIndex = 1;
-            this.ObjectColorFromTexture.Text = "Z tekstury";
+            this.ObjectColorFromTexture.Text = "From texture";
             this.ObjectColorFromTexture.UseVisualStyleBackColor = true;
             // 
             // ObjectColorSingle
@@ -635,10 +782,10 @@
             this.ObjectColorSingle.Checked = true;
             this.ObjectColorSingle.Location = new System.Drawing.Point(3, 12);
             this.ObjectColorSingle.Name = "ObjectColorSingle";
-            this.ObjectColorSingle.Size = new System.Drawing.Size(50, 17);
+            this.ObjectColorSingle.Size = new System.Drawing.Size(67, 17);
             this.ObjectColorSingle.TabIndex = 0;
             this.ObjectColorSingle.TabStop = true;
-            this.ObjectColorSingle.Text = "Stały";
+            this.ObjectColorSingle.Text = "Constant";
             this.ObjectColorSingle.UseVisualStyleBackColor = true;
             // 
             // tableLayoutPanel5
@@ -703,7 +850,7 @@
             this.SetObjectTextureButton.Size = new System.Drawing.Size(75, 23);
             this.SetObjectTextureButton.TabIndex = 2;
             this.SetObjectTextureButton.TabStop = false;
-            this.SetObjectTextureButton.Text = "Zmień";
+            this.SetObjectTextureButton.Text = "Change";
             this.SetObjectTextureButton.UseVisualStyleBackColor = false;
             // 
             // SetObjectColorButton
@@ -717,7 +864,7 @@
             this.SetObjectColorButton.Size = new System.Drawing.Size(75, 23);
             this.SetObjectColorButton.TabIndex = 1;
             this.SetObjectColorButton.TabStop = false;
-            this.SetObjectColorButton.Text = "Zmień";
+            this.SetObjectColorButton.Text = "Change";
             this.SetObjectColorButton.UseVisualStyleBackColor = false;
             // 
             // groupBox3
@@ -727,10 +874,10 @@
             this.groupBox3.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.groupBox3.Location = new System.Drawing.Point(3, 288);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(282, 255);
+            this.groupBox3.Size = new System.Drawing.Size(282, 320);
             this.groupBox3.TabIndex = 2;
             this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "Wektor normalny z zaburzeniem";
+            this.groupBox3.Text = "Normal vector with disruption";
             // 
             // tableLayoutPanel7
             // 
@@ -745,7 +892,7 @@
             this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 10F));
             this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
-            this.tableLayoutPanel7.Size = new System.Drawing.Size(276, 236);
+            this.tableLayoutPanel7.Size = new System.Drawing.Size(276, 301);
             this.tableLayoutPanel7.TabIndex = 0;
             // 
             // groupBox5
@@ -753,12 +900,12 @@
             this.groupBox5.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.groupBox5.Controls.Add(this.tableLayoutPanel11);
             this.groupBox5.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.groupBox5.Location = new System.Drawing.Point(3, 126);
+            this.groupBox5.Location = new System.Drawing.Point(3, 189);
             this.groupBox5.Name = "groupBox5";
             this.groupBox5.Size = new System.Drawing.Size(270, 107);
             this.groupBox5.TabIndex = 5;
             this.groupBox5.TabStop = false;
-            this.groupBox5.Text = "Zaburzenie D";
+            this.groupBox5.Text = "Disruption vector";
             // 
             // tableLayoutPanel11
             // 
@@ -809,7 +956,7 @@
             this.DisruptionVectorFromTexture.Name = "DisruptionVectorFromTexture";
             this.DisruptionVectorFromTexture.Size = new System.Drawing.Size(84, 35);
             this.DisruptionVectorFromTexture.TabIndex = 2;
-            this.DisruptionVectorFromTexture.Text = "Z tekstury Height Map";
+            this.DisruptionVectorFromTexture.Text = "Height Map";
             this.DisruptionVectorFromTexture.UseVisualStyleBackColor = true;
             // 
             // DisruptionVectorConstant
@@ -822,7 +969,7 @@
             this.DisruptionVectorConstant.Size = new System.Drawing.Size(84, 35);
             this.DisruptionVectorConstant.TabIndex = 1;
             this.DisruptionVectorConstant.TabStop = true;
-            this.DisruptionVectorConstant.Text = "Brak";
+            this.DisruptionVectorConstant.Text = "None";
             this.DisruptionVectorConstant.UseVisualStyleBackColor = true;
             // 
             // tableLayoutPanel12
@@ -888,7 +1035,7 @@
             this.SetHeightMapButton.Size = new System.Drawing.Size(75, 23);
             this.SetHeightMapButton.TabIndex = 2;
             this.SetHeightMapButton.TabStop = false;
-            this.SetHeightMapButton.Text = "Zmień";
+            this.SetHeightMapButton.Text = "Change";
             this.SetHeightMapButton.UseVisualStyleBackColor = false;
             // 
             // groupBox4
@@ -898,10 +1045,10 @@
             this.groupBox4.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.groupBox4.Location = new System.Drawing.Point(3, 13);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(270, 107);
+            this.groupBox4.Size = new System.Drawing.Size(270, 170);
             this.groupBox4.TabIndex = 3;
             this.groupBox4.TabStop = false;
-            this.groupBox4.Text = "Wektor normalny N przed zaburzeniem";
+            this.groupBox4.Text = "Normal vector without disruption";
             // 
             // tableLayoutPanel8
             // 
@@ -917,7 +1064,7 @@
             this.tableLayoutPanel8.Name = "tableLayoutPanel8";
             this.tableLayoutPanel8.RowCount = 1;
             this.tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel8.Size = new System.Drawing.Size(264, 88);
+            this.tableLayoutPanel8.Size = new System.Drawing.Size(264, 151);
             this.tableLayoutPanel8.TabIndex = 0;
             // 
             // panel2
@@ -926,33 +1073,48 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(3, 3);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(90, 82);
+            this.panel2.Size = new System.Drawing.Size(90, 145);
             this.panel2.TabIndex = 0;
             // 
             // tableLayoutPanel15
             // 
             this.tableLayoutPanel15.ColumnCount = 1;
-            this.tableLayoutPanel15.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel15.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel15.Controls.Add(this.NormalVectorAnimated, 0, 2);
             this.tableLayoutPanel15.Controls.Add(this.NormalVectorFromTexture, 0, 1);
             this.tableLayoutPanel15.Controls.Add(this.NormalVectorConstant, 0, 0);
             this.tableLayoutPanel15.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel15.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel15.Name = "tableLayoutPanel15";
-            this.tableLayoutPanel15.RowCount = 2;
-            this.tableLayoutPanel15.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel15.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel15.Size = new System.Drawing.Size(90, 82);
+            this.tableLayoutPanel15.RowCount = 5;
+            this.tableLayoutPanel15.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel15.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel15.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel15.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel15.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel15.Size = new System.Drawing.Size(90, 145);
             this.tableLayoutPanel15.TabIndex = 0;
+            // 
+            // NormalVectorAnimated
+            // 
+            this.NormalVectorAnimated.AutoSize = true;
+            this.NormalVectorAnimated.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.NormalVectorAnimated.Location = new System.Drawing.Point(3, 61);
+            this.NormalVectorAnimated.Name = "NormalVectorAnimated";
+            this.NormalVectorAnimated.Size = new System.Drawing.Size(84, 23);
+            this.NormalVectorAnimated.TabIndex = 4;
+            this.NormalVectorAnimated.Text = "Animated";
+            this.NormalVectorAnimated.UseVisualStyleBackColor = true;
             // 
             // NormalVectorFromTexture
             // 
             this.NormalVectorFromTexture.AutoSize = true;
             this.NormalVectorFromTexture.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.NormalVectorFromTexture.Location = new System.Drawing.Point(3, 44);
+            this.NormalVectorFromTexture.Location = new System.Drawing.Point(3, 32);
             this.NormalVectorFromTexture.Name = "NormalVectorFromTexture";
-            this.NormalVectorFromTexture.Size = new System.Drawing.Size(84, 35);
+            this.NormalVectorFromTexture.Size = new System.Drawing.Size(84, 23);
             this.NormalVectorFromTexture.TabIndex = 3;
-            this.NormalVectorFromTexture.Text = "Z tekstury Normal Map";
+            this.NormalVectorFromTexture.Text = "Normal map";
             this.NormalVectorFromTexture.UseVisualStyleBackColor = true;
             // 
             // NormalVectorConstant
@@ -962,34 +1124,49 @@
             this.NormalVectorConstant.Dock = System.Windows.Forms.DockStyle.Fill;
             this.NormalVectorConstant.Location = new System.Drawing.Point(3, 3);
             this.NormalVectorConstant.Name = "NormalVectorConstant";
-            this.NormalVectorConstant.Size = new System.Drawing.Size(84, 35);
+            this.NormalVectorConstant.Size = new System.Drawing.Size(84, 23);
             this.NormalVectorConstant.TabIndex = 2;
             this.NormalVectorConstant.TabStop = true;
-            this.NormalVectorConstant.Text = "Stały";
+            this.NormalVectorConstant.Text = "Constant";
             this.NormalVectorConstant.UseVisualStyleBackColor = true;
             // 
             // tableLayoutPanel9
             // 
             this.tableLayoutPanel9.ColumnCount = 1;
-            this.tableLayoutPanel9.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel9.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel9.Controls.Add(this.label7, 0, 2);
             this.tableLayoutPanel9.Controls.Add(this.NormalVectorTextureBox, 0, 1);
             this.tableLayoutPanel9.Controls.Add(this.label2, 0, 0);
+            this.tableLayoutPanel9.Controls.Add(this.label8, 0, 3);
             this.tableLayoutPanel9.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel9.Location = new System.Drawing.Point(99, 3);
             this.tableLayoutPanel9.Name = "tableLayoutPanel9";
-            this.tableLayoutPanel9.RowCount = 2;
-            this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel9.Size = new System.Drawing.Size(69, 82);
+            this.tableLayoutPanel9.RowCount = 5;
+            this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel9.Size = new System.Drawing.Size(69, 145);
             this.tableLayoutPanel9.TabIndex = 1;
+            // 
+            // label7
+            // 
+            this.label7.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.Location = new System.Drawing.Point(20, 64);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(29, 16);
+            this.label7.TabIndex = 5;
+            this.label7.Text = "a = ";
             // 
             // NormalVectorTextureBox
             // 
             this.NormalVectorTextureBox.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.NormalVectorTextureBox.BackColor = System.Drawing.Color.White;
             this.NormalVectorTextureBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.NormalVectorTextureBox.Location = new System.Drawing.Point(9, 50);
+            this.NormalVectorTextureBox.Location = new System.Drawing.Point(9, 32);
             this.NormalVectorTextureBox.Name = "NormalVectorTextureBox";
             this.NormalVectorTextureBox.Size = new System.Drawing.Size(50, 23);
             this.NormalVectorTextureBox.TabIndex = 3;
@@ -1000,25 +1177,56 @@
             this.label2.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(13, 12);
+            this.label2.Location = new System.Drawing.Point(13, 6);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(43, 16);
             this.label2.TabIndex = 4;
             this.label2.Text = "[0,0,1]";
             // 
+            // label8
+            // 
+            this.label8.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.Location = new System.Drawing.Point(20, 93);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(29, 16);
+            this.label8.TabIndex = 6;
+            this.label8.Text = "b = ";
+            // 
             // tableLayoutPanel10
             // 
             this.tableLayoutPanel10.ColumnCount = 1;
-            this.tableLayoutPanel10.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel10.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel10.Controls.Add(this.NormalVectorAnimatedParametersUpdate, 0, 4);
             this.tableLayoutPanel10.Controls.Add(this.SetNormalMapButton, 0, 1);
+            this.tableLayoutPanel10.Controls.Add(this.NormalVectorAnimatedParameterA, 0, 2);
+            this.tableLayoutPanel10.Controls.Add(this.NormalVectorAnimatedParameterB, 0, 3);
             this.tableLayoutPanel10.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel10.Location = new System.Drawing.Point(174, 3);
             this.tableLayoutPanel10.Name = "tableLayoutPanel10";
-            this.tableLayoutPanel10.RowCount = 2;
-            this.tableLayoutPanel10.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel10.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel10.Size = new System.Drawing.Size(87, 82);
+            this.tableLayoutPanel10.RowCount = 5;
+            this.tableLayoutPanel10.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel10.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel10.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel10.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel10.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel10.Size = new System.Drawing.Size(87, 145);
             this.tableLayoutPanel10.TabIndex = 2;
+            // 
+            // NormalVectorAnimatedParametersUpdate
+            // 
+            this.NormalVectorAnimatedParametersUpdate.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.NormalVectorAnimatedParametersUpdate.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.NormalVectorAnimatedParametersUpdate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.NormalVectorAnimatedParametersUpdate.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.NormalVectorAnimatedParametersUpdate.Location = new System.Drawing.Point(6, 119);
+            this.NormalVectorAnimatedParametersUpdate.Name = "NormalVectorAnimatedParametersUpdate";
+            this.NormalVectorAnimatedParametersUpdate.Size = new System.Drawing.Size(75, 23);
+            this.NormalVectorAnimatedParametersUpdate.TabIndex = 5;
+            this.NormalVectorAnimatedParametersUpdate.TabStop = false;
+            this.NormalVectorAnimatedParametersUpdate.Text = "Update";
+            this.NormalVectorAnimatedParametersUpdate.UseVisualStyleBackColor = false;
             // 
             // SetNormalMapButton
             // 
@@ -1026,165 +1234,43 @@
             this.SetNormalMapButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.SetNormalMapButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.SetNormalMapButton.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.SetNormalMapButton.Location = new System.Drawing.Point(6, 50);
+            this.SetNormalMapButton.Location = new System.Drawing.Point(6, 32);
             this.SetNormalMapButton.Name = "SetNormalMapButton";
             this.SetNormalMapButton.Size = new System.Drawing.Size(75, 23);
             this.SetNormalMapButton.TabIndex = 2;
             this.SetNormalMapButton.TabStop = false;
-            this.SetNormalMapButton.Text = "Zmień";
+            this.SetNormalMapButton.Text = "Change";
             this.SetNormalMapButton.UseVisualStyleBackColor = false;
+            // 
+            // NormalVectorAnimatedParameterA
+            // 
+            this.NormalVectorAnimatedParameterA.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.NormalVectorAnimatedParameterA.Location = new System.Drawing.Point(18, 62);
+            this.NormalVectorAnimatedParameterA.Name = "NormalVectorAnimatedParameterA";
+            this.NormalVectorAnimatedParameterA.Size = new System.Drawing.Size(50, 20);
+            this.NormalVectorAnimatedParameterA.TabIndex = 3;
+            this.NormalVectorAnimatedParameterA.TabStop = false;
+            // 
+            // NormalVectorAnimatedParameterB
+            // 
+            this.NormalVectorAnimatedParameterB.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.NormalVectorAnimatedParameterB.Location = new System.Drawing.Point(18, 91);
+            this.NormalVectorAnimatedParameterB.Name = "NormalVectorAnimatedParameterB";
+            this.NormalVectorAnimatedParameterB.Size = new System.Drawing.Size(50, 20);
+            this.NormalVectorAnimatedParameterB.TabIndex = 4;
+            this.NormalVectorAnimatedParameterB.TabStop = false;
             // 
             // TextureFileDialog
             // 
-            this.TextureFileDialog.Filter = "Images | *.jpg; *.jpeg; *.png ; *.bmp; *.gif";
-            // 
-            // groupBox8
-            // 
-            this.groupBox8.Controls.Add(this.tableLayoutPanel24);
-            this.groupBox8.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.groupBox8.Location = new System.Drawing.Point(3, 175);
-            this.groupBox8.Name = "groupBox8";
-            this.groupBox8.Size = new System.Drawing.Size(282, 107);
-            this.groupBox8.TabIndex = 6;
-            this.groupBox8.TabStop = false;
-            this.groupBox8.Text = "Kolor trojkąta 2 Io";
-            // 
-            // tableLayoutPanel24
-            // 
-            this.tableLayoutPanel24.ColumnCount = 3;
-            this.tableLayoutPanel24.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel24.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 45F));
-            this.tableLayoutPanel24.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 55F));
-            this.tableLayoutPanel24.Controls.Add(this.panel6, 0, 0);
-            this.tableLayoutPanel24.Controls.Add(this.tableLayoutPanel25, 1, 0);
-            this.tableLayoutPanel24.Controls.Add(this.tableLayoutPanel26, 2, 0);
-            this.tableLayoutPanel24.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel24.Location = new System.Drawing.Point(3, 16);
-            this.tableLayoutPanel24.Name = "tableLayoutPanel24";
-            this.tableLayoutPanel24.RowCount = 1;
-            this.tableLayoutPanel24.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel24.Size = new System.Drawing.Size(276, 88);
-            this.tableLayoutPanel24.TabIndex = 0;
-            // 
-            // panel6
-            // 
-            this.panel6.Controls.Add(this.ObjectColorFromTexture2);
-            this.panel6.Controls.Add(this.ObjectColorSingle2);
-            this.panel6.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel6.Location = new System.Drawing.Point(3, 3);
-            this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(90, 82);
-            this.panel6.TabIndex = 0;
-            // 
-            // ObjectColorFromTexture2
-            // 
-            this.ObjectColorFromTexture2.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.ObjectColorFromTexture2.AutoSize = true;
-            this.ObjectColorFromTexture2.Location = new System.Drawing.Point(3, 53);
-            this.ObjectColorFromTexture2.Name = "ObjectColorFromTexture2";
-            this.ObjectColorFromTexture2.Size = new System.Drawing.Size(72, 17);
-            this.ObjectColorFromTexture2.TabIndex = 1;
-            this.ObjectColorFromTexture2.Text = "Z tekstury";
-            this.ObjectColorFromTexture2.UseVisualStyleBackColor = true;
-            // 
-            // ObjectColorSingle2
-            // 
-            this.ObjectColorSingle2.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.ObjectColorSingle2.AutoSize = true;
-            this.ObjectColorSingle2.Checked = true;
-            this.ObjectColorSingle2.Location = new System.Drawing.Point(3, 12);
-            this.ObjectColorSingle2.Name = "ObjectColorSingle2";
-            this.ObjectColorSingle2.Size = new System.Drawing.Size(50, 17);
-            this.ObjectColorSingle2.TabIndex = 0;
-            this.ObjectColorSingle2.TabStop = true;
-            this.ObjectColorSingle2.Text = "Stały";
-            this.ObjectColorSingle2.UseVisualStyleBackColor = true;
-            // 
-            // tableLayoutPanel25
-            // 
-            this.tableLayoutPanel25.ColumnCount = 1;
-            this.tableLayoutPanel25.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel25.Controls.Add(this.IoTextureBox2, 0, 1);
-            this.tableLayoutPanel25.Controls.Add(this.IoColorBox2, 0, 0);
-            this.tableLayoutPanel25.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel25.Location = new System.Drawing.Point(99, 3);
-            this.tableLayoutPanel25.Name = "tableLayoutPanel25";
-            this.tableLayoutPanel25.RowCount = 2;
-            this.tableLayoutPanel25.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel25.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel25.Size = new System.Drawing.Size(75, 82);
-            this.tableLayoutPanel25.TabIndex = 1;
-            // 
-            // IoTextureBox2
-            // 
-            this.IoTextureBox2.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.IoTextureBox2.BackColor = System.Drawing.Color.White;
-            this.IoTextureBox2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.IoTextureBox2.Location = new System.Drawing.Point(12, 50);
-            this.IoTextureBox2.Name = "IoTextureBox2";
-            this.IoTextureBox2.Size = new System.Drawing.Size(50, 23);
-            this.IoTextureBox2.TabIndex = 3;
-            this.IoTextureBox2.TabStop = false;
-            // 
-            // IoColorBox2
-            // 
-            this.IoColorBox2.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.IoColorBox2.BackColor = System.Drawing.Color.White;
-            this.IoColorBox2.Location = new System.Drawing.Point(12, 9);
-            this.IoColorBox2.Name = "IoColorBox2";
-            this.IoColorBox2.Size = new System.Drawing.Size(50, 23);
-            this.IoColorBox2.TabIndex = 2;
-            this.IoColorBox2.TabStop = false;
-            // 
-            // tableLayoutPanel26
-            // 
-            this.tableLayoutPanel26.ColumnCount = 1;
-            this.tableLayoutPanel26.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel26.Controls.Add(this.SetObjectTextureButton2, 0, 1);
-            this.tableLayoutPanel26.Controls.Add(this.SetObjectColorButton2, 0, 0);
-            this.tableLayoutPanel26.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel26.Location = new System.Drawing.Point(180, 3);
-            this.tableLayoutPanel26.Name = "tableLayoutPanel26";
-            this.tableLayoutPanel26.RowCount = 2;
-            this.tableLayoutPanel26.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel26.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel26.Size = new System.Drawing.Size(93, 82);
-            this.tableLayoutPanel26.TabIndex = 2;
-            // 
-            // SetObjectTextureButton2
-            // 
-            this.SetObjectTextureButton2.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.SetObjectTextureButton2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.SetObjectTextureButton2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.SetObjectTextureButton2.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.SetObjectTextureButton2.Location = new System.Drawing.Point(9, 50);
-            this.SetObjectTextureButton2.Name = "SetObjectTextureButton2";
-            this.SetObjectTextureButton2.Size = new System.Drawing.Size(75, 23);
-            this.SetObjectTextureButton2.TabIndex = 2;
-            this.SetObjectTextureButton2.TabStop = false;
-            this.SetObjectTextureButton2.Text = "Zmień";
-            this.SetObjectTextureButton2.UseVisualStyleBackColor = false;
-            // 
-            // SetObjectColorButton2
-            // 
-            this.SetObjectColorButton2.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.SetObjectColorButton2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.SetObjectColorButton2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.SetObjectColorButton2.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.SetObjectColorButton2.Location = new System.Drawing.Point(9, 9);
-            this.SetObjectColorButton2.Name = "SetObjectColorButton2";
-            this.SetObjectColorButton2.Size = new System.Drawing.Size(75, 23);
-            this.SetObjectColorButton2.TabIndex = 1;
-            this.SetObjectColorButton2.TabStop = false;
-            this.SetObjectColorButton2.Text = "Zmień";
-            this.SetObjectColorButton2.UseVisualStyleBackColor = false;
+            this.TextureFileDialog.Filter = "Images (*.jpg, *.jpeg, *.png, *.bmp, *.gif) | *.jpg; *.jpeg; *.png; *.bmp; *.gif;" +
+    "";
             // 
             // PolygonFiller
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(48)))));
-            this.ClientSize = new System.Drawing.Size(1184, 961);
+            this.ClientSize = new System.Drawing.Size(1184, 962);
             this.Controls.Add(this.tableLayoutPanel1);
             this.ForeColor = System.Drawing.SystemColors.ControlText;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -1194,6 +1280,14 @@
             this.tableLayoutPanel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.drawingArea)).EndInit();
             this.tableLayoutPanel2.ResumeLayout(false);
+            this.groupBox8.ResumeLayout(false);
+            this.tableLayoutPanel24.ResumeLayout(false);
+            this.panel6.ResumeLayout(false);
+            this.panel6.PerformLayout();
+            this.tableLayoutPanel25.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.IoTextureBox2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.IoColorBox2)).EndInit();
+            this.tableLayoutPanel26.ResumeLayout(false);
             this.groupBox7.ResumeLayout(false);
             this.tableLayoutPanel20.ResumeLayout(false);
             this.panel5.ResumeLayout(false);
@@ -1243,14 +1337,7 @@
             this.tableLayoutPanel9.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.NormalVectorTextureBox)).EndInit();
             this.tableLayoutPanel10.ResumeLayout(false);
-            this.groupBox8.ResumeLayout(false);
-            this.tableLayoutPanel24.ResumeLayout(false);
-            this.panel6.ResumeLayout(false);
-            this.panel6.PerformLayout();
-            this.tableLayoutPanel25.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.IoTextureBox2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.IoColorBox2)).EndInit();
-            this.tableLayoutPanel26.ResumeLayout(false);
+            this.tableLayoutPanel10.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -1337,6 +1424,12 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel26;
         private System.Windows.Forms.Button SetObjectTextureButton2;
         private System.Windows.Forms.Button SetObjectColorButton2;
+        private System.Windows.Forms.RadioButton NormalVectorAnimated;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Button NormalVectorAnimatedParametersUpdate;
+        private System.Windows.Forms.TextBox NormalVectorAnimatedParameterA;
+        private System.Windows.Forms.TextBox NormalVectorAnimatedParameterB;
     }
 }
 

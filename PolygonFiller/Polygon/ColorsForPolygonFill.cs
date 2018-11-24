@@ -5,6 +5,7 @@ namespace PolygonFiller
 {
     public class ColorsForPolygonFill
     {
+        public static Size AnimatedNormalVectorMatrixSize { get; set; }
         public static Vector3 ConstantVectorToLight { get; set; }
         public static Vector3 ConstantNormalVector { get; set; }
         public static Vector3 ConstantDisruptionVector { get; set; }
@@ -21,12 +22,14 @@ namespace PolygonFiller
         public Size DrawingAreaSize { get; set; }
 
         public RBGHeadlights RBGHeadlights { get; set; }
+        public NormalVectorCustomGenerator AnimatedNormalVectorGenerator { get; set; }
         public bool RGBHeadlightsEnabled { get; set; }
 
         private Color[,] colorsFromObjectTexture;
         private Vector3[,] normalMapVectors;
         private Vector3[,] heightMapVectors;
         private Vector3[,] rgbHeadlights;
+        private Vector3[,] animatedNormalVectors;
 
         private int[,] CachedColors;
 
@@ -34,7 +37,7 @@ namespace PolygonFiller
         {
             int rx = x < 0 ? 0 : x;
             int ry = y < 0 ? 0 : y;
-            return CachedColors[rx % DrawingAreaSize.Width, ry % DrawingAreaSize.Height];
+            return CachedColors[rx % CachedColors.GetLength(0), ry % CachedColors.GetLength(1)];
         }
 
         public void SetObjectTexture(Bitmap objectTexture)
@@ -129,6 +132,11 @@ namespace PolygonFiller
             }
         }
 
+        public void UpdateAnimatedNormalMap()
+        {
+            animatedNormalVectors = AnimatedNormalVectorGenerator.GetCustomNormalVectorsArray(AnimatedNormalVectorMatrixSize);
+        }
+
         private Vector3 GetNormalVector(int x, int y)
         {
             return NormalVectorOption == NormalVectorOption.Constant
@@ -201,9 +209,13 @@ namespace PolygonFiller
                     {
                         N = ConstantNormalVector;
                     }
-                    else
+                    else if (NormalVectorOption == NormalVectorOption.FromNormalMap)
                     {
                         N = normalMapVectors[rx % normalMapVectors.GetLength(0), ry % normalMapVectors.GetLength(1)];
+                    }
+                    else
+                    {
+                        N = animatedNormalVectors[rx % animatedNormalVectors.GetLength(0), ry % animatedNormalVectors.GetLength(1)];
                     }
 
                     if (DisruptionVectorOption == DisruptionVectorOption.None)
@@ -228,15 +240,15 @@ namespace PolygonFiller
                         Vector3 vectorToLight = Vector3.Normalize(new Vector3(LightSourcePosition.X - x, LightSourcePosition.Y - y, LightSourcePosition.Z));
                         cos = N.X * vectorToLight.X + N.Y * vectorToLight.Y + N.Z * vectorToLight.Z;
                     }
-                    Vector3 vecToHeadlight = Vector3.Normalize(new Vector3(RBGHeadlights.rPos.X - x, -RBGHeadlights.rPos.Y - y, RBGHeadlights.rPos.Z));
+                    Vector3 vecToHeadlight = Vector3.Normalize(new Vector3(RBGHeadlights.RedHeadlightPos.X - x, -RBGHeadlights.RedHeadlightPos.Y - y, RBGHeadlights.RedHeadlightPos.Z));
                     cosHeadlights.X = N.X * vecToHeadlight.X + N.Y * vecToHeadlight.Y + N.Z * vecToHeadlight.Z;
                     cosR = N.X * vecToHeadlight.X + N.Y * vecToHeadlight.Y + N.Z * vecToHeadlight.Z;
                     cosR = cosR < 0 ? 0 : cosR;
-                    vecToHeadlight = Vector3.Normalize(new Vector3(RBGHeadlights.gPos.X - x, RBGHeadlights.gPos.Y - y, RBGHeadlights.gPos.Z));
+                    vecToHeadlight = Vector3.Normalize(new Vector3(RBGHeadlights.GreenHeadlightPos.X - x, RBGHeadlights.GreenHeadlightPos.Y - y, RBGHeadlights.GreenHeadlightPos.Z));
                     cosHeadlights.Y = N.X * vecToHeadlight.X + N.Y * vecToHeadlight.Y + N.Z * vecToHeadlight.Z;
                     cosG = N.X * vecToHeadlight.X + N.Y * vecToHeadlight.Y + N.Z * vecToHeadlight.Z;
                     cosG = cosG < 0 ? 0 : cosG;
-                    vecToHeadlight = Vector3.Normalize(new Vector3(RBGHeadlights.bPos.X - x, RBGHeadlights.bPos.Y - y, RBGHeadlights.bPos.Z));
+                    vecToHeadlight = Vector3.Normalize(new Vector3(RBGHeadlights.BlueHeadlightPos.X - x, RBGHeadlights.BlueHeadlightPos.Y - y, RBGHeadlights.BlueHeadlightPos.Z));
                     cosHeadlights.Z = N.X * vecToHeadlight.X + N.Y * vecToHeadlight.Y + N.Z * vecToHeadlight.Z;
                     cosB = N.X * vecToHeadlight.X + N.Y * vecToHeadlight.Y + N.Z * vecToHeadlight.Z;
                     cosB = cosB < 0 ? 0 : cosB;
@@ -276,54 +288,13 @@ namespace PolygonFiller
     public enum NormalVectorOption
     {
         Constant,
-        FromNormalMap
+        FromNormalMap,
+        NormalVectorAnimated
     }
 
     public enum DisruptionVectorOption
     {
         None,
         FromHeightMap
-    }
-
-    public class RBGHeadlights
-    {
-        public int HeadlightsHeight { get; set; }
-        public int CosinePower { get; set; }
-        public Vector3 rPos { get; private set; }
-        public Vector3 gPos { get; private set; }
-        public Vector3 bPos { get; private set; }
-
-        public Vector3[,] GetRGBHeadlightsMatrix(Size screenSize)
-        {
-            rPos = new Vector3(screenSize.Width / 2, 0, HeadlightsHeight);
-            gPos = new Vector3(0, screenSize.Height, HeadlightsHeight);
-            bPos = new Vector3(screenSize.Width, screenSize.Height, HeadlightsHeight);
-
-            Vector3 rToMid = Vector3.Normalize(new Vector3(rPos.X - screenSize.Width / 2, rPos.Y - screenSize.Height / 2, rPos.Z));
-            Vector3 gToMid = Vector3.Normalize(new Vector3(gPos.X - screenSize.Width / 2, gPos.Y - screenSize.Height / 2, gPos.Z));
-            Vector3 bToMid = Vector3.Normalize(new Vector3(bPos.X - screenSize.Width / 2, bPos.Y - screenSize.Height / 2, bPos.Z));
-
-            Vector3[,] result = new Vector3[screenSize.Width, screenSize.Height];
-            for (int i = 0; i < screenSize.Width; i++)
-            {
-                for (int j = 0; j < screenSize.Height; j++)
-                {
-                    Vector3 curToR = Vector3.Normalize(new Vector3(rPos.X - i, rPos.Y - j, rPos.Z));
-                    float rCos = rToMid.X * curToR.X + rToMid.Y * curToR.Y + rToMid.Z * curToR.Z;
-                    rCos = System.Math.Abs((float)System.Math.Pow(rCos, CosinePower));
-
-                    Vector3 curToG = Vector3.Normalize(new Vector3(gPos.X - i, gPos.Y - j, gPos.Z));
-                    float gCos = gToMid.X * curToG.X + gToMid.Y * curToG.Y + gToMid.Z * curToG.Z;
-                    gCos = System.Math.Abs((float)System.Math.Pow(gCos, CosinePower));
-
-                    Vector3 curToB = Vector3.Normalize(new Vector3(bPos.X - i, bPos.Y - j, bPos.Z));
-                    float bCos = bToMid.X * curToB.X + bToMid.Y * curToB.Y + bToMid.Z * curToB.Z;
-                    bCos = System.Math.Abs((float)System.Math.Pow(bCos, CosinePower));
-
-                    result[i, j] = new Vector3(rCos, gCos, bCos);
-                }
-            }
-            return result;
-        }
     }
 }

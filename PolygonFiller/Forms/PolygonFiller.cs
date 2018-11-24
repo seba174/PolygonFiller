@@ -69,6 +69,7 @@ namespace PolygonFiller
             ColorsForPolygonFill.ConstantDisruptionVector = new Vector3(0, 0, 0);
             ColorsForPolygonFill.ConstantNormalVector = new Vector3(0, 0, 1);
             ColorsForPolygonFill.ConstantVectorToLight = new Vector3(0, 0, 1);
+            ColorsForPolygonFill.AnimatedNormalVectorMatrixSize = new Size(300, 300);
 
             rgbHeadlights = new RBGHeadlights
             {
@@ -91,7 +92,12 @@ namespace PolygonFiller
                 ObjectColor = ILColorBox.BackColor,
                 LightColor = new Vector3(1, 1, 1),
                 DrawingAreaSize = drawingArea.Size,
-                RBGHeadlights = rgbHeadlights
+                RBGHeadlights = rgbHeadlights,
+                AnimatedNormalVectorGenerator = new NormalVectorCustomGenerator
+                {
+                    A = 0.1f,
+                    B = 0.1f
+                }
             };
 
             colorsForPolygonFill2 = new ColorsForPolygonFill
@@ -103,7 +109,12 @@ namespace PolygonFiller
                 ObjectColor = colorsForPolygonFill.ObjectColor,
                 LightColor = colorsForPolygonFill.LightColor,
                 DrawingAreaSize = colorsForPolygonFill.DrawingAreaSize,
-                RBGHeadlights = rgbHeadlights2
+                RBGHeadlights = rgbHeadlights2,
+                AnimatedNormalVectorGenerator = new NormalVectorCustomGenerator
+                {
+                    A = colorsForPolygonFill.AnimatedNormalVectorGenerator.A,
+                    B = colorsForPolygonFill.AnimatedNormalVectorGenerator.B
+                }
             };
 
             DisruptionVectorTextureBox.BackgroundImage = Images.brick_heightmap;
@@ -175,6 +186,27 @@ namespace PolygonFiller
             HighlightsHeightTextBox.Text = rgbHeadlights.HeadlightsHeight.ToString();
             HighlightsHeightTextBox.TextChanged += HighlightsHeightTextboxTextChangedHandler;
             RgbHeadlightsParameterAccept.Click += SetNewRgbHeadlightsParameters;
+
+            NormalVectorAnimated.Click += SetNormalVectorAnimated;
+            NormalVectorAnimatedParameterA.Text = colorsForPolygonFill.AnimatedNormalVectorGenerator.A.ToString();
+            NormalVectorAnimatedParameterB.Text = colorsForPolygonFill.AnimatedNormalVectorGenerator.B.ToString();
+            NormalVectorAnimatedParametersUpdate.Click += UpdateAnimatedNormalVectorParameters;
+        }
+
+        private void UpdateAnimatedNormalVectorParameters(object sender, EventArgs e)
+        {
+            if (float.TryParse(NormalVectorAnimatedParameterA.Text, out float a) && float.TryParse(NormalVectorAnimatedParameterB.Text, out float b))
+            {
+                colorsForPolygonFill.AnimatedNormalVectorGenerator.A = a;
+                colorsForPolygonFill2.AnimatedNormalVectorGenerator.A = a;
+                colorsForPolygonFill.AnimatedNormalVectorGenerator.B = b;
+                colorsForPolygonFill2.AnimatedNormalVectorGenerator.B = b;
+                if (colorsForPolygonFill.NormalVectorOption == NormalVectorOption.NormalVectorAnimated)
+                {
+                    UpdateAnimetedNormalMap();
+                    UpdatePolygonsCache();
+                }
+            }
         }
 
         private void HandleWindowMaximization(object sender, EventArgs e)
@@ -360,6 +392,31 @@ namespace PolygonFiller
                 colorsForPolygonFill2.NormalVectorOption = NormalVectorOption.Constant;
                 UpdatePolygonsCache();
                 drawingArea.Refresh();
+            }
+        }
+
+        private async void SetNormalVectorAnimated(object sender, EventArgs e)
+        {
+            if (!NormalVectorAnimated.Checked || colorsForPolygonFill.NormalVectorOption == NormalVectorOption.NormalVectorAnimated)
+            {
+                return;
+            }
+
+            colorsForPolygonFill.NormalVectorOption = NormalVectorOption.NormalVectorAnimated;
+            colorsForPolygonFill2.NormalVectorOption = NormalVectorOption.NormalVectorAnimated;
+
+            while (true)
+            {
+                UpdateAnimetedNormalMap();
+                UpdatePolygonsCache();
+                drawingArea.Refresh();
+
+                await Task.Delay(900);
+
+                if (colorsForPolygonFill.NormalVectorOption != NormalVectorOption.NormalVectorAnimated)
+                {
+                    return;
+                }
             }
         }
 
@@ -563,6 +620,14 @@ namespace PolygonFiller
         {
             var t1 = Task.Run(() => colorsForPolygonFill.EnableRgbHeadlights());
             var t2 = Task.Run(() => colorsForPolygonFill2.EnableRgbHeadlights());
+            t1.Wait();
+            t2.Wait();
+        }
+
+        private void UpdateAnimetedNormalMap()
+        {
+            var t1 = Task.Run(() => colorsForPolygonFill.UpdateAnimatedNormalMap());
+            var t2 = Task.Run(() => colorsForPolygonFill2.UpdateAnimatedNormalMap());
             t1.Wait();
             t2.Wait();
         }

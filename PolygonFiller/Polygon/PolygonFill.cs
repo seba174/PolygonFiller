@@ -17,34 +17,7 @@ namespace PolygonFiller
             };
 
             List<EdgeDetails>[] et = new List<EdgeDetails>[directBitmap.Height - 1];
-
-            foreach (var edge in polygon.Edges)
-            {
-                int dx = edge.Endpoints[0].Position.X - edge.Endpoints[1].Position.X;
-                int dy = edge.Endpoints[0].Position.Y - edge.Endpoints[1].Position.Y;
-                if (dy == 0)
-                {
-                    continue;
-                }
-
-                Vertice pointWithMaxY = edge.Endpoints.Where(v => v.Position.Y == edge.Endpoints.Max(vertice => vertice.Position.Y)).First();
-                EdgeDetails bucket = new EdgeDetails
-                {
-                    YMax = pointWithMaxY.Position.Y,
-                    XofSecondVertice = edge.GetSecondEndpoint(pointWithMaxY).Position.X - xMin,
-                    Step = (double)dx / dy
-                };
-
-                int indexInEtTable = edge.GetSecondEndpoint(pointWithMaxY).Position.Y - yMin;
-                if (et[indexInEtTable] == null)
-                {
-                    et[indexInEtTable] = new List<EdgeDetails> { bucket };
-                }
-                else
-                {
-                    et[indexInEtTable].Add(bucket);
-                }
-            }
+            PrepareEdgeDetails(et, polygon.Edges, xMin, yMin);
 
             List<EdgeDetails> aet = new List<EdgeDetails>();
             EdgeDetailsComparer bucketComparer = new EdgeDetailsComparer();
@@ -77,20 +50,36 @@ namespace PolygonFiller
 
             return directBitmap;
         }
-    }
 
-    public class EdgeDetailsComparer : IComparer<EdgeDetails>
-    {
-        public int Compare(EdgeDetails x, EdgeDetails y)
+        private static void PrepareEdgeDetails(List<EdgeDetails>[] edgeDetails, List<Edge> edges, int xMin, int yMin)
         {
-            return x.XofSecondVertice.CompareTo(y.XofSecondVertice);
-        }
-    }
+            foreach (var edge in edges)
+            {
+                int dx = edge.Endpoints[0].Position.X - edge.Endpoints[1].Position.X;
+                int dy = edge.Endpoints[0].Position.Y - edge.Endpoints[1].Position.Y;
+                if (dy == 0)
+                {
+                    continue;
+                }
 
-    public class EdgeDetails
-    {
-        public int YMax { get; set; }
-        public double XofSecondVertice { get; set; }
-        public double Step { get; set; }
+                Vertice pointWithMaxY = edge.Endpoints.Where(v => v.Position.Y == edge.Endpoints.Max(vertice => vertice.Position.Y)).First();
+                EdgeDetails bucket = new EdgeDetails
+                {
+                    YMax = pointWithMaxY.Position.Y,
+                    XofSecondVertice = edge.GetSecondEndpoint(pointWithMaxY).Position.X - xMin,
+                    Step = (double)dx / dy
+                };
+
+                int indexInEtTable = edge.GetSecondEndpoint(pointWithMaxY).Position.Y - yMin;
+                if (edgeDetails[indexInEtTable] == null)
+                {
+                    edgeDetails[indexInEtTable] = new List<EdgeDetails> { bucket };
+                }
+                else
+                {
+                    edgeDetails[indexInEtTable].Add(bucket);
+                }
+            }
+        }
     }
 }
